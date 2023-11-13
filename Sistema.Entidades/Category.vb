@@ -4,6 +4,7 @@
     Private _name As String
     Private _description As String
     Private _state As Boolean
+
 #End Region
 #Region "Properties"
     Public Property IdCategory As Integer

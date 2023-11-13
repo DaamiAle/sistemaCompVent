@@ -23,7 +23,7 @@ Public Class CategoryData
             Dim table As New DataTable
             Dim command As New SqlCommand("category_search", ConnectionString)
             command.CommandType = CommandType.StoredProcedure
-            command.Parameters.AddWithValue("@value", value)
+            command.Parameters.AddWithValue("@name", value)
             'command.Parameters.Add("@value", SqlDbType.VarChar).Value = value
             ConnectionString.Open()
             result = command.ExecuteReader()
@@ -51,7 +51,7 @@ Public Class CategoryData
         Try
             Dim command As New SqlCommand("category_update", ConnectionString)
             command.CommandType = CommandType.StoredProcedure
-            command.Parameters.AddWithValue("@id", entity.IdCategory)
+            command.Parameters.AddWithValue("@idcategory", entity.IdCategory)
             command.Parameters.AddWithValue("@name", entity.Name)
             command.Parameters.AddWithValue("@description", entity.Description)
             ConnectionString.Open()
@@ -65,7 +65,7 @@ Public Class CategoryData
         Try
             Dim command As New SqlCommand("category_delete", ConnectionString)
             command.CommandType = CommandType.StoredProcedure
-            command.Parameters.AddWithValue("@id", id)
+            command.Parameters.AddWithValue("@idcategory", id)
             ConnectionString.Open()
             command.ExecuteNonQuery()
             ConnectionString.Close()
@@ -77,7 +77,7 @@ Public Class CategoryData
         Try
             Dim command As New SqlCommand("category_disable", ConnectionString)
             command.CommandType = CommandType.StoredProcedure
-            command.Parameters.AddWithValue("@id", id)
+            command.Parameters.AddWithValue("@idcategory", id)
             ConnectionString.Open()
             command.ExecuteNonQuery()
             ConnectionString.Close()
@@ -89,7 +89,7 @@ Public Class CategoryData
         Try
             Dim command As New SqlCommand("category_enable", ConnectionString)
             command.CommandType = CommandType.StoredProcedure
-            command.Parameters.AddWithValue("@id", id)
+            command.Parameters.AddWithValue("@idcategory", id)
             ConnectionString.Open()
             command.ExecuteNonQuery()
             ConnectionString.Close()
