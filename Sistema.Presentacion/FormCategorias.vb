@@ -117,7 +117,7 @@ Public Class FormCategorias
         idTextBox.Text = category.IdCategory
         nameTextBox.Text = category.Name
         descriptionTextBox.Text = category.Description
-        stateBox.Text = IIf(category.State = 1, "Activo", "Inactivo")
+        stateBox.Text = IIf(category.State = True, "Activo", "Inactivo")
     End Sub
 
     Private Sub btnClearFields_Click(sender As Object, e As EventArgs) Handles btnClearFields.Click
@@ -268,6 +268,42 @@ Public Class FormCategorias
                 MsgBox("Filas deshabilitadas correctamente", vbOKOnly + vbInformation, "Filas deshabilitadas")
                 GetCategoryList()
                 CheckBox1.Checked = False
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        End If
+    End Sub
+
+    Private Sub btnEnableDisable_Click(sender As Object, e As EventArgs) Handles btnEnableDisable.Click
+        Dim business As New Negocio.CategoryBusiness
+        Dim id As Integer = idTextBox.Text
+        Dim state As Boolean = stateBox.Text = "Activo"
+        Try
+            If (state) Then
+                business.Disable(id)
+                MsgBox("Categoria deshabilitada correctamente", vbOKOnly + vbInformation, "Categoria deshabilitada")
+            Else
+                business.Enable(id)
+                MsgBox("Categoria habilitada correctamente", vbOKOnly + vbInformation, "Categoria habilitada")
+            End If
+            GetCategoryList()
+            ClearFields()
+            TabControl1.SelectTab(0)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        If MsgBox("Esta seguro que desea eliminar la categoria? Esta acción no se puede deshacer.", vbYesNo + vbQuestion, "Eliminar categoria") = vbYes Then
+            Dim business As New Negocio.CategoryBusiness
+            Dim id As Integer = idTextBox.Text
+            Try
+                business.Delete(id)
+                MsgBox("Categoria eliminada correctamente", vbOKOnly + vbInformation, "Categoria eliminada")
+                GetCategoryList()
+                ClearFields()
+                TabControl1.SelectTab(0)
             Catch ex As Exception
                 MsgBox(ex.Message)
             End Try

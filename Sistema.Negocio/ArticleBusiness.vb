@@ -1,10 +1,10 @@
 ﻿Imports Sistema.Datos
 Imports Sistema.Entidades
 
-Public Class CategoryBusiness
-    Private data As CategoryData
+Public Class ArticleBusiness
+    Private data As ArticleData
     Public Sub New()
-        data = New CategoryData
+        data = New ArticleData
     End Sub
     Public Function List() As DataTable
         Try
@@ -22,7 +22,7 @@ Public Class CategoryBusiness
             Return Nothing
         End Try
     End Function
-    Public Function Insert(entity As Category) As Boolean
+    Public Function Insert(entity As Article) As Boolean
         Try
             data.Insert(entity)
             Return True
@@ -31,7 +31,7 @@ Public Class CategoryBusiness
             Return False
         End Try
     End Function
-    Public Function Update(entity As Category) As Boolean
+    Public Function Update(entity As Article) As Boolean
         Try
             data.Update(entity)
             Return True
@@ -58,6 +58,7 @@ Public Class CategoryBusiness
             Return False
         End Try
     End Function
+
     Public Function Enable(id As Integer) As Boolean
         Try
             data.Enable(id)
@@ -67,4 +68,5 @@ Public Class CategoryBusiness
             Return False
         End Try
     End Function
+
 End Class
