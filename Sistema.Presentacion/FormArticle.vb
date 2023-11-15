@@ -3,6 +3,9 @@ Imports Sistema.Entidades
 
 Public Class FormArticle
     Private business As New Negocio.ArticleBusiness
+    Private originPath As String
+    Private destinationPath As String
+    Private directory As String = "D:\sistema\"
 
     Private Sub FormArticle_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         totalCount.Location = New Point(Width - totalCount.Width, totalCount.Location.Y)
@@ -208,12 +211,28 @@ Public Class FormArticle
     Private Sub ChargeCategories()
         Try
             cboxCategories.DataSource = New Negocio.CategoryBusiness().ActiveCategories()
-            cboxCategories.ValueMember = "IdCategory"
+            cboxCategories.ValueMember = "ID"
             cboxCategories.DisplayMember = "Name"
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
     End Sub
+
+    Private Sub btnChargeImage_Click(sender As Object, e As EventArgs) Handles btnChargeImage.Click
+        Dim fileDialog As New OpenFileDialog()
+        fileDialog.Filter = "Image Files (*.jpg;*.jpeg;*.png;*.bmp)|*.jpg;*.jpeg;*.png;*.bmp"
+        If fileDialog.ShowDialog() = DialogResult.OK Then
+            originPath = fileDialog.FileName
+            imageBox.Image = Image.FromFile(originPath)
+            pathImage.Text = originPath.Split("\").Last()
+        End If
+    End Sub
+
+#Region "Insert"
+    Private Sub btnInsertNew_Click(sender As Object, e As EventArgs) Handles btnInsertNew.Click
+
+    End Sub
+#End Region
 
 
 #End Region

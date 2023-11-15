@@ -24,7 +24,6 @@ Public Class CategoryData
             Dim command As New SqlCommand("category_search", ConnectionString)
             command.CommandType = CommandType.StoredProcedure
             command.Parameters.AddWithValue("@name", value)
-            'command.Parameters.Add("@value", SqlDbType.VarChar).Value = value
             ConnectionString.Open()
             result = command.ExecuteReader()
             table.Load(result)
