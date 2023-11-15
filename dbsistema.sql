@@ -118,9 +118,52 @@ create table detalle_venta (
 );
 go
 
-
-
-
+-- Creamos 3 insert para cada tabla --
+-- Insertar en la tabla categoria --
+insert into categoria (nombre, descripcion) values ('Laptops', 'Laptops de última generación');
+insert into categoria (nombre, descripcion) values ('Celulares', 'Celulares de última generación');
+insert into categoria (nombre, descripcion) values ('Accesorios', 'Accesorios para celulares y laptops');
+go
+-- Insertar en la tabla articulo --
+insert into articulo (idcategoria, codigo, nombre, precio_venta, stock, descripcion, imagen) values (1, 'LAP001', 'Laptop HP', 1000, 10, 'Laptop HP 8GB RAM', null);
+insert into articulo (idcategoria, codigo, nombre, precio_venta, stock, descripcion, imagen) values (1, 'LAP002', 'Laptop Dell', 1200, 10, 'Laptop Dell 8GB RAM', null);
+insert into articulo (idcategoria, codigo, nombre, precio_venta, stock, descripcion, imagen) values (2, 'CEL001', 'Celular Samsung', 500, 10, 'Celular Samsung 8GB RAM', null);
+go
+-- Insertar en la tabla persona --
+insert into persona (tipo_persona, nombre, tipo_documento, num_documento, direccion, telefono, email) values ('Proveedor', 'Juan Perez', 'DNI', '12345678', 'Av. Lima 123', '123456789', '44556677', 'juanperez@proveedpr.com');
+insert into persona (tipo_persona, nombre, tipo_documento, num_documento, direccion, telefono, email) values ('Cliente', 'Maria Diaz', 'DNI', '87654321', 'Av. Lima 456', '987654321', '11223344', 'mariadiaz@gmail.com');
+insert into persona (tipo_persona, nombre, tipo_documento, num_documento, direccion, telefono, email) values ('Cliente', 'Pedro Rodriguez', 'DNI', '12345678', 'Av. Lima 789', '123456789', '44556677', 'pedrito@gmail.com');
+go
+-- Insertar en la tabla rol --
+insert into rol (nombre, descripcion) values ('Administrador', 'Administradores de la empresa');
+insert into rol (nombre, descripcion) values ('Vendedor', 'Vendedores de la empresa');
+insert into rol (nombre, descripcion) values ('Almacenero', 'Almaceneros de la empresa');
+go
+-- Insertar en la tabla usuario --
+insert into usuario (idrol, nombre, tipo_documento, num_documento, direccion, telefono, email, clave) values (1, 'JuanCarlos', 'DNI', '12345678', 'Av. Lima 123', '123456789', '44556677', 'juancarlos@empresa.com', 'admin');
+insert into usuario (idrol, nombre, tipo_documento, num_documento, direccion, telefono, email, clave) values (2, 'MarcosTadeus', 'DNI', '87654321', 'Av. Lima 456', '987654321', '11223344', 'marcostadeus@empresa.com', 'vendedor');
+insert into usuario (idrol, nombre, tipo_documento, num_documento, direccion, telefono, email, clave) values (3, 'AlbertoLopez', 'DNI', '12345678', 'Av. Lima 789', '123456789', '44556677', 'albertolopez@empresa.com', 'almacenero');
+go
+-- Insertar en la tabla ingreso --
+insert into ingreso (idproveedor, idusuario, tipo_comprobante, serie_comprobante, num_comprobante, fecha, impuesto, total, estado) values (1, 1, 'Boleta', '001', '0000001', '2020-01-01', 0.18, 1000, 'Aceptado');
+insert into ingreso (idproveedor, idusuario, tipo_comprobante, serie_comprobante, num_comprobante, fecha, impuesto, total, estado) values (1, 1, 'Boleta', '001', '0000002', '2020-01-02', 0.18, 1200, 'Aceptado');
+insert into ingreso (idproveedor, idusuario, tipo_comprobante, serie_comprobante, num_comprobante, fecha, impuesto, total, estado) values (1, 1, 'Boleta', '001', '0000003', '2020-01-03', 0.18, 500, 'Aceptado');
+go
+-- Insertar en la tabla detalle_ingreso --
+insert into detalle_ingreso (idingreso, idarticulo, cantidad, precio) values (1, 1, 10, 1000);
+insert into detalle_ingreso (idingreso, idarticulo, cantidad, precio) values (2, 2, 10, 1200);
+insert into detalle_ingreso (idingreso, idarticulo, cantidad, precio) values (3, 3, 10, 500);
+go
+-- Insertar en la tabla venta --
+insert into venta (idcliente, idusuario, tipo_comprobante, serie_comprobante, num_comprobante, fecha, impuesto, total, estado) values (2, 1, 'Boleta', '001', '0000001', '2020-01-01', 0.18, 1000, 'Aceptado');
+insert into venta (idcliente, idusuario, tipo_comprobante, serie_comprobante, num_comprobante, fecha, impuesto, total, estado) values (2, 1, 'Boleta', '001', '0000002', '2020-01-02', 0.18, 1200, 'Aceptado');
+insert into venta (idcliente, idusuario, tipo_comprobante, serie_comprobante, num_comprobante, fecha, impuesto, total, estado) values (3, 1, 'Boleta', '001', '0000003', '2020-01-03', 0.18, 500, 'Aceptado');
+go
+-- Insertar en la tabla detalle_venta --
+insert into detalle_venta (idventa, idarticulo, cantidad, precio, descuento) values (1, 1, 10, 1000, 0);
+insert into detalle_venta (idventa, idarticulo, cantidad, precio, descuento) values (2, 2, 10, 1200, 0);
+insert into detalle_venta (idventa, idarticulo, cantidad, precio, descuento) values (3, 3, 10, 500, 0);
+go
 
 
 -- Ahora los procesos CRUD de Categoria--
