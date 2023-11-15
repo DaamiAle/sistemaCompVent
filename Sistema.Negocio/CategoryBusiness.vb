@@ -22,6 +22,14 @@ Public Class CategoryBusiness
             Return Nothing
         End Try
     End Function
+    Public Function ActiveCategories() As DataTable
+        Try
+            Return data.ActiveCategories()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return Nothing
+        End Try
+    End Function
     Public Function Insert(entity As Category) As Boolean
         Try
             data.Insert(entity)

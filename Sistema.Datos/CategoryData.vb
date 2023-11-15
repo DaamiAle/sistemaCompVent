@@ -98,5 +98,20 @@ Public Class CategoryData
         End Try
     End Sub
 
+    Public Function ActiveCategories() As DataTable
+        Try
+            Dim result As SqlDataReader
+            Dim table As New DataTable
+            Dim command As New SqlCommand("active_category_list", ConnectionString)
+            command.CommandType = CommandType.StoredProcedure
+            ConnectionString.Open()
+            result = command.ExecuteReader()
+            table.Load(result)
+            ConnectionString.Close()
+            Return table
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
 
 End Class

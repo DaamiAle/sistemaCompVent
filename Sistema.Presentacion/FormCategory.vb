@@ -1,6 +1,12 @@
 ﻿Imports Sistema.Entidades
 
-Public Class FormCategorias
+Public Class FormCategory
+
+    Private Sub FormCategorias_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        totalCount.Location = New Point(Width - totalCount.Width, totalCount.Location.Y)
+        GetCategoryList()
+        nameNeeded.SetError(nameTextBox, "Este campo es obligatorio")
+    End Sub
     Private Sub Format()
         dgvListado.Columns(0).Visible = False
         dgvListado.Columns(0).Width = 100
@@ -8,7 +14,15 @@ Public Class FormCategorias
         dgvListado.Columns(2).Width = 150
         dgvListado.Columns(3).Width = 400
         dgvListado.Columns(4).Width = 100
+
+        btnDeleteMulti.Visible = False
+        btnDisableMulti.Visible = False
+        btnEnableMulti.Visible = False
+        CheckBox1.CheckState = False
     End Sub
+
+
+#Region "Tab1"
 
     Private Sub GetCategoryList()
         Try
@@ -32,12 +46,6 @@ Public Class FormCategorias
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
-    End Sub
-
-    Private Sub FormCategorias_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        totalCount.Location = New Point(Width - totalCount.Width, totalCount.Location.Y)
-        GetCategoryList()
-        nameNeeded.SetError(nameTextBox, "Este campo es obligatorio")
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
@@ -84,6 +92,114 @@ Public Class FormCategorias
         ChargeCategoryInModifier(category)
         TabControl1.SelectTab(1)
     End Sub
+
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+        If (CheckBox1.Checked) Then
+            dgvListado.Columns(0).Visible = True
+            ShowButtons()
+        Else
+            dgvListado.Columns(0).Visible = False
+            For Each row As DataGridViewRow In dgvListado.Rows
+                row.Cells(0).Value = False
+            Next
+            HideButtons()
+        End If
+    End Sub
+
+    Private Sub ShowButtons()
+        btnDeleteMulti.Visible = True
+        btnEnableMulti.Visible = True
+        btnDisableMulti.Visible = True
+    End Sub
+
+    Private Sub HideButtons()
+        btnDeleteMulti.Visible = False
+        btnEnableMulti.Visible = False
+        btnDisableMulti.Visible = False
+    End Sub
+
+    Private Sub dgvListado_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvListado.CellContentClick
+        If e.ColumnIndex = dgvListado.Columns.Item(0).Index Then
+            Dim checkboxCell As DataGridViewCheckBoxCell = dgvListado.Rows(e.RowIndex).Cells(0)
+            checkboxCell.Value = Not checkboxCell.Value
+        End If
+    End Sub
+
+    Private Sub btnDeleteMulti_Click(sender As Object, e As EventArgs) Handles btnDeleteMulti.Click
+        If MsgBox("Esta seguro que desea eliminar las filas seleccionadas? Esta acción no se puede deshacer.", vbYesNo + vbQuestion, "Eliminar filas") = vbYes Then
+            Dim business As New Negocio.CategoryBusiness
+            Dim rows As DataGridViewRowCollection = dgvListado.Rows
+            Dim selectedRows As New List(Of DataGridViewRow)
+            For Each row As DataGridViewRow In rows
+                If row.Cells(0).Value Then
+                    selectedRows.Add(row)
+                End If
+            Next
+            Try
+                For Each row As DataGridViewRow In selectedRows
+                    Dim id As Integer = row.Cells(1).Value
+                    business.Delete(id)
+                Next
+                MsgBox("Filas eliminadas correctamente", vbOKOnly + vbInformation, "Filas eliminadas")
+                GetCategoryList()
+                CheckBox1.Checked = False
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        End If
+    End Sub
+
+    Private Sub btnEnableMulti_Click(sender As Object, e As EventArgs) Handles btnEnableMulti.Click
+        If MsgBox("Esta seguro que desea habilitar las filas seleccionadas?", vbYesNo + vbQuestion, "Habilitar filas") = vbYes Then
+            Dim business As New Negocio.CategoryBusiness
+            Dim rows As DataGridViewRowCollection = dgvListado.Rows
+            Dim selectedRows As New List(Of DataGridViewRow)
+            For Each row As DataGridViewRow In rows
+                If row.Cells(0).Value Then
+                    selectedRows.Add(row)
+                End If
+            Next
+            Try
+                For Each row As DataGridViewRow In selectedRows
+                    Dim id As Integer = row.Cells(1).Value
+                    business.Enable(id)
+                Next
+                MsgBox("Filas habilitadas correctamente", vbOKOnly + vbInformation, "Filas habilitadas")
+                GetCategoryList()
+                CheckBox1.Checked = False
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        End If
+    End Sub
+
+    Private Sub btnDisableMulti_Click(sender As Object, e As EventArgs) Handles btnDisableMulti.Click
+        If MsgBox("Esta seguro que desea deshabilitar las filas seleccionadas?", vbYesNo + vbQuestion, "Deshabilitar filas") = vbYes Then
+            Dim business As New Negocio.CategoryBusiness
+            Dim rows As DataGridViewRowCollection = dgvListado.Rows
+            Dim selectedRows As New List(Of DataGridViewRow)
+            For Each row As DataGridViewRow In rows
+                If row.Cells(0).Value Then
+                    selectedRows.Add(row)
+                End If
+            Next
+            Try
+                For Each row As DataGridViewRow In selectedRows
+                    Dim id As Integer = row.Cells(1).Value
+                    business.Disable(id)
+                Next
+                MsgBox("Filas deshabilitadas correctamente", vbOKOnly + vbInformation, "Filas deshabilitadas")
+                GetCategoryList()
+                CheckBox1.Checked = False
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        End If
+    End Sub
+
+#End Region
+
+#Region "Tab 2"
 
     Private Sub btnInsertNew_Click(sender As Object, e As EventArgs) Handles btnInsertNew.Click
         ' validamos que el campo de nombre este lleno
@@ -170,110 +286,6 @@ Public Class FormCategorias
         End If
     End Sub
 
-    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
-        If (CheckBox1.Checked) Then
-            dgvListado.Columns(0).Visible = True
-            EnableButtons()
-        Else
-            dgvListado.Columns(0).Visible = False
-            For Each row As DataGridViewRow In dgvListado.Rows
-                row.Cells(0).Value = False
-            Next
-            DisableButtons()
-        End If
-    End Sub
-
-    Private Sub EnableButtons()
-        btnDeleteMulti.Enabled = True
-        btnEnableMulti.Enabled = True
-        btnDisableMulti.Enabled = True
-    End Sub
-
-    Private Sub DisableButtons()
-        btnDeleteMulti.Enabled = False
-        btnEnableMulti.Enabled = False
-        btnDisableMulti.Enabled = False
-    End Sub
-
-    Private Sub dgvListado_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvListado.CellContentClick
-        If e.ColumnIndex = dgvListado.Columns.Item(0).Index Then
-            Dim checkboxCell As DataGridViewCheckBoxCell = dgvListado.Rows(e.RowIndex).Cells(0)
-            checkboxCell.Value = Not checkboxCell.Value
-        End If
-    End Sub
-
-    Private Sub btnDeleteMulti_Click(sender As Object, e As EventArgs) Handles btnDeleteMulti.Click
-        If MsgBox("Esta seguro que desea eliminar las filas seleccionadas? Esta acción no se puede deshacer.", vbYesNo + vbQuestion, "Eliminar filas") = vbYes Then
-            Dim business As New Negocio.CategoryBusiness
-            Dim rows As DataGridViewRowCollection = dgvListado.Rows
-            Dim selectedRows As New List(Of DataGridViewRow)
-            For Each row As DataGridViewRow In rows
-                If row.Cells(0).Value Then
-                    selectedRows.Add(row)
-                End If
-            Next
-            Try
-                For Each row As DataGridViewRow In selectedRows
-                    Dim id As Integer = row.Cells(1).Value
-                    business.Delete(id)
-                Next
-                MsgBox("Filas eliminadas correctamente", vbOKOnly + vbInformation, "Filas eliminadas")
-                GetCategoryList()
-                CheckBox1.Checked = False
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
-        End If
-    End Sub
-
-    Private Sub btnEnableMulti_Click(sender As Object, e As EventArgs) Handles btnEnableMulti.Click
-        If MsgBox("Esta seguro que desea habilitar las filas seleccionadas?", vbYesNo + vbQuestion, "Habilitar filas") = vbYes Then
-            Dim business As New Negocio.CategoryBusiness
-            Dim rows As DataGridViewRowCollection = dgvListado.Rows
-            Dim selectedRows As New List(Of DataGridViewRow)
-            For Each row As DataGridViewRow In rows
-                If row.Cells(0).Value Then
-                    selectedRows.Add(row)
-                End If
-            Next
-            Try
-                For Each row As DataGridViewRow In selectedRows
-                    Dim id As Integer = row.Cells(1).Value
-                    business.Enable(id)
-                Next
-                MsgBox("Filas habilitadas correctamente", vbOKOnly + vbInformation, "Filas habilitadas")
-                GetCategoryList()
-                CheckBox1.Checked = False
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
-        End If
-    End Sub
-
-    Private Sub btnDisableMulti_Click(sender As Object, e As EventArgs) Handles btnDisableMulti.Click
-        If MsgBox("Esta seguro que desea deshabilitar las filas seleccionadas?", vbYesNo + vbQuestion, "Deshabilitar filas") = vbYes Then
-            Dim business As New Negocio.CategoryBusiness
-            Dim rows As DataGridViewRowCollection = dgvListado.Rows
-            Dim selectedRows As New List(Of DataGridViewRow)
-            For Each row As DataGridViewRow In rows
-                If row.Cells(0).Value Then
-                    selectedRows.Add(row)
-                End If
-            Next
-            Try
-                For Each row As DataGridViewRow In selectedRows
-                    Dim id As Integer = row.Cells(1).Value
-                    business.Disable(id)
-                Next
-                MsgBox("Filas deshabilitadas correctamente", vbOKOnly + vbInformation, "Filas deshabilitadas")
-                GetCategoryList()
-                CheckBox1.Checked = False
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
-        End If
-    End Sub
-
     Private Sub btnEnableDisable_Click(sender As Object, e As EventArgs) Handles btnEnableDisable.Click
         Dim business As New Negocio.CategoryBusiness
         Dim id As Integer = idTextBox.Text
@@ -310,5 +322,6 @@ Public Class FormCategorias
         End If
     End Sub
 
+#End Region
 
 End Class

@@ -86,9 +86,16 @@ Public Class MainForm
     Private m_ChildFormNumber As Integer
 
     Private Sub CategoríasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CategoríasToolStripMenuItem.Click
-        Dim frm As New FormCategorias
-        frm.MdiParent = Me
-        frm.WindowState = FormWindowState.Maximized
-        frm.Show()
+        Dim form As New FormCategory
+        form.MdiParent = Me
+        form.WindowState = FormWindowState.Maximized
+        form.Show()
+    End Sub
+
+    Private Sub ArtículosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ArtículosToolStripMenuItem.Click
+        Dim form As New FormArticle
+        form.MdiParent = Me
+        form.WindowState = FormWindowState.Maximized
+        form.Show()
     End Sub
 End Class
