@@ -21,6 +21,8 @@ create table articulo (
 );
 go
 
+alter table articulo alter column imagen varchar(512);
+
 --Tabla Persona
 create table persona(
 	idpersona integer primary key identity,
@@ -130,9 +132,9 @@ insert into articulo (idcategoria, codigo, nombre, precio_venta, stock, descripc
 insert into articulo (idcategoria, codigo, nombre, precio_venta, stock, descripcion, imagen) values (2, 'CEL001', 'Celular Samsung', 500, 10, 'Celular Samsung 8GB RAM', null);
 go
 -- Insertar en la tabla persona --
-insert into persona (tipo_persona, nombre, tipo_documento, num_documento, direccion, telefono, email) values ('Proveedor', 'Juan Perez', 'DNI', '12345678', 'Av. Lima 123', '123456789', '44556677', 'juanperez@proveedpr.com');
-insert into persona (tipo_persona, nombre, tipo_documento, num_documento, direccion, telefono, email) values ('Cliente', 'Maria Diaz', 'DNI', '87654321', 'Av. Lima 456', '987654321', '11223344', 'mariadiaz@gmail.com');
-insert into persona (tipo_persona, nombre, tipo_documento, num_documento, direccion, telefono, email) values ('Cliente', 'Pedro Rodriguez', 'DNI', '12345678', 'Av. Lima 789', '123456789', '44556677', 'pedrito@gmail.com');
+insert into persona (tipo_persona, nombre, tipo_documento, num_documento, direccion, telefono, email) values ('Proveedor', 'Juan Perez', 'DNI', '12345678', 'Av. Lima 123', '44556677', 'juanperez@proveedpr.com');
+insert into persona (tipo_persona, nombre, tipo_documento, num_documento, direccion, telefono, email) values ('Cliente', 'Maria Diaz', 'DNI', '87654321', 'Av. Lima 456', '11223344', 'mariadiaz@gmail.com');
+insert into persona (tipo_persona, nombre, tipo_documento, num_documento, direccion, telefono, email) values ('Cliente', 'Pedro Rodriguez', 'DNI', '12345678', 'Av. Lima 789', '12345678', 'pedrito@gmail.com');
 go
 -- Insertar en la tabla rol --
 insert into rol (nombre, descripcion) values ('Administrador', 'Administradores de la empresa');
@@ -140,9 +142,9 @@ insert into rol (nombre, descripcion) values ('Vendedor', 'Vendedores de la empr
 insert into rol (nombre, descripcion) values ('Almacenero', 'Almaceneros de la empresa');
 go
 -- Insertar en la tabla usuario --
-insert into usuario (idrol, nombre, tipo_documento, num_documento, direccion, telefono, email, clave) values (1, 'JuanCarlos', 'DNI', '12345678', 'Av. Lima 123', '123456789', '44556677', 'juancarlos@empresa.com', 'admin');
-insert into usuario (idrol, nombre, tipo_documento, num_documento, direccion, telefono, email, clave) values (2, 'MarcosTadeus', 'DNI', '87654321', 'Av. Lima 456', '987654321', '11223344', 'marcostadeus@empresa.com', 'vendedor');
-insert into usuario (idrol, nombre, tipo_documento, num_documento, direccion, telefono, email, clave) values (3, 'AlbertoLopez', 'DNI', '12345678', 'Av. Lima 789', '123456789', '44556677', 'albertolopez@empresa.com', 'almacenero');
+insert into usuario (idrol, nombre, tipo_documento, num_documento, direccion, telefono, email, clave) values (1, 'JuanCarlos', 'DNI', '12345678', 'Av. Lima 123', '12345678', 'juancarlos@empresa.com', CONVERT(varbinary,'admin'));
+insert into usuario (idrol, nombre, tipo_documento, num_documento, direccion, telefono, email, clave) values (2, 'MarcosTadeus', 'DNI', '87654321', 'Av. Lima 456', '11223344', 'marcostadeus@empresa.com', CONVERT(varbinary,'vendedor'));
+insert into usuario (idrol, nombre, tipo_documento, num_documento, direccion, telefono, email, clave) values (3, 'AlbertoLopez', 'DNI', '12345678', 'Av. Lima 789', '44556677', 'albertolopez@empresa.com', CONVERT(varbinary,'almacenero'));
 go
 -- Insertar en la tabla ingreso --
 insert into ingreso (idproveedor, idusuario, tipo_comprobante, serie_comprobante, num_comprobante, fecha, impuesto, total, estado) values (1, 1, 'Boleta', '001', '0000001', '2020-01-01', 0.18, 1000, 'Aceptado');
@@ -151,8 +153,8 @@ insert into ingreso (idproveedor, idusuario, tipo_comprobante, serie_comprobante
 go
 -- Insertar en la tabla detalle_ingreso --
 insert into detalle_ingreso (idingreso, idarticulo, cantidad, precio) values (1, 1, 10, 1000);
-insert into detalle_ingreso (idingreso, idarticulo, cantidad, precio) values (2, 2, 10, 1200);
-insert into detalle_ingreso (idingreso, idarticulo, cantidad, precio) values (3, 3, 10, 500);
+insert into detalle_ingreso (idingreso, idarticulo, cantidad, precio) values (8, 2, 10, 1200);
+insert into detalle_ingreso (idingreso, idarticulo, cantidad, precio) values (9, 3, 10, 500);
 go
 -- Insertar en la tabla venta --
 insert into venta (idcliente, idusuario, tipo_comprobante, serie_comprobante, num_comprobante, fecha, impuesto, total, estado) values (2, 1, 'Boleta', '001', '0000001', '2020-01-01', 0.18, 1000, 'Aceptado');
@@ -160,9 +162,9 @@ insert into venta (idcliente, idusuario, tipo_comprobante, serie_comprobante, nu
 insert into venta (idcliente, idusuario, tipo_comprobante, serie_comprobante, num_comprobante, fecha, impuesto, total, estado) values (3, 1, 'Boleta', '001', '0000003', '2020-01-03', 0.18, 500, 'Aceptado');
 go
 -- Insertar en la tabla detalle_venta --
-insert into detalle_venta (idventa, idarticulo, cantidad, precio, descuento) values (1, 1, 10, 1000, 0);
-insert into detalle_venta (idventa, idarticulo, cantidad, precio, descuento) values (2, 2, 10, 1200, 0);
-insert into detalle_venta (idventa, idarticulo, cantidad, precio, descuento) values (3, 3, 10, 500, 0);
+insert into detalle_venta (idventa, idarticulo, cantidad, precio, descuento) values (7, 1, 10, 1000, 0);
+insert into detalle_venta (idventa, idarticulo, cantidad, precio, descuento) values (8, 2, 10, 1200, 0);
+insert into detalle_venta (idventa, idarticulo, cantidad, precio, descuento) values (9, 3, 10, 500, 0);
 go
 
 
@@ -175,6 +177,15 @@ as
 select idcategoria as ID, nombre as Name, descripcion as Description, estado as State
 from categoria 
 order by idcategoria desc;
+go
+
+-- Obtener por id --
+create proc category_get_by_id
+@idcategory integer
+as
+select idcategoria as ID, nombre as Name, descripcion as Description, estado as State
+from categoria 
+where idcategoria = @idcategory;
 go
 
 -- Buscar --
@@ -240,6 +251,15 @@ as
 select a.idarticulo as ID, a.idcategoria as IDCategory, c.nombre as Category, a.codigo as Code, a.nombre as Name, a.precio_venta as Price, a.stock as Stock, a.descripcion as Description, a.imagen as Image, a.estado as State
 from articulo a inner join categoria c on a.idcategoria = c.idcategoria
 order by a.idarticulo desc;
+go
+
+-- Obtener por id --
+create proc article_get_by_id
+@idarticle integer
+as
+select a.idarticulo as ID, a.idcategoria as IDCategory, c.nombre as Category, a.codigo as Code, a.nombre as Name, a.precio_venta as Price, a.stock as Stock, a.descripcion as Description, a.imagen as Image, a.estado as State
+from articulo a inner join categoria c on a.idcategoria = c.idcategoria
+where a.idarticulo = @idarticle;
 go
 
 -- Buscar --

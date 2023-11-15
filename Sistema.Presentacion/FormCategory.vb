@@ -202,7 +202,6 @@ Public Class FormCategory
 #Region "Tab 2"
 
     Private Sub btnInsertNew_Click(sender As Object, e As EventArgs) Handles btnInsertNew.Click
-        ' validamos que el campo de nombre este lleno
         If (nameTextBox.Text.Length = 0) Then
             MsgBox("Los campos con indicador '!' son campos obligatorios")
         Else

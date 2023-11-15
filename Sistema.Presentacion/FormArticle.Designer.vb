@@ -25,6 +25,16 @@ Partial Class FormArticle
         Me.components = New System.ComponentModel.Container()
         Me.nameNeeded = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.imageBox = New System.Windows.Forms.PictureBox()
+        Me.btnChargeImage = New System.Windows.Forms.Button()
+        Me.pathImage = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.stockBox = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.priceBox = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.nameBox = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.cboxCategories = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnClearFields = New System.Windows.Forms.Button()
@@ -32,10 +42,10 @@ Partial Class FormArticle
         Me.btnEnableDisable = New System.Windows.Forms.Button()
         Me.btnModify = New System.Windows.Forms.Button()
         Me.btnInsertNew = New System.Windows.Forms.Button()
-        Me.descriptionTextBox = New System.Windows.Forms.TextBox()
+        Me.descriptionBox = New System.Windows.Forms.TextBox()
         Me.stateBox = New System.Windows.Forms.TextBox()
-        Me.nameTextBox = New System.Windows.Forms.TextBox()
-        Me.idTextBox = New System.Windows.Forms.TextBox()
+        Me.codeBox = New System.Windows.Forms.TextBox()
+        Me.idBox = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.stateLabelMant = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -52,26 +62,18 @@ Partial Class FormArticle
         Me.btnEnableMulti = New System.Windows.Forms.Button()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.btnClearSearchValue = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.pathImage = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.btnChargeImage = New System.Windows.Forms.Button()
-        Me.imageBox = New System.Windows.Forms.PictureBox()
         Me.stockNeeded = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.priceNeeded = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.categoryNeeded = New System.Windows.Forms.ErrorProvider(Me.components)
         CType(Me.nameNeeded, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
+        CType(Me.imageBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvListado, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
-        CType(Me.imageBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.stockNeeded, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.priceNeeded, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.categoryNeeded, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'nameNeeded
@@ -85,11 +87,11 @@ Partial Class FormArticle
         Me.TabPage2.Controls.Add(Me.btnChargeImage)
         Me.TabPage2.Controls.Add(Me.pathImage)
         Me.TabPage2.Controls.Add(Me.Label7)
-        Me.TabPage2.Controls.Add(Me.TextBox2)
+        Me.TabPage2.Controls.Add(Me.stockBox)
         Me.TabPage2.Controls.Add(Me.Label5)
-        Me.TabPage2.Controls.Add(Me.TextBox3)
+        Me.TabPage2.Controls.Add(Me.priceBox)
         Me.TabPage2.Controls.Add(Me.Label6)
-        Me.TabPage2.Controls.Add(Me.TextBox1)
+        Me.TabPage2.Controls.Add(Me.nameBox)
         Me.TabPage2.Controls.Add(Me.Label4)
         Me.TabPage2.Controls.Add(Me.cboxCategories)
         Me.TabPage2.Controls.Add(Me.Label2)
@@ -98,10 +100,10 @@ Partial Class FormArticle
         Me.TabPage2.Controls.Add(Me.btnEnableDisable)
         Me.TabPage2.Controls.Add(Me.btnModify)
         Me.TabPage2.Controls.Add(Me.btnInsertNew)
-        Me.TabPage2.Controls.Add(Me.descriptionTextBox)
+        Me.TabPage2.Controls.Add(Me.descriptionBox)
         Me.TabPage2.Controls.Add(Me.stateBox)
-        Me.TabPage2.Controls.Add(Me.nameTextBox)
-        Me.TabPage2.Controls.Add(Me.idTextBox)
+        Me.TabPage2.Controls.Add(Me.codeBox)
+        Me.TabPage2.Controls.Add(Me.idBox)
         Me.TabPage2.Controls.Add(Me.Label3)
         Me.TabPage2.Controls.Add(Me.stateLabelMant)
         Me.TabPage2.Controls.Add(Me.Label1)
@@ -114,9 +116,95 @@ Partial Class FormArticle
         Me.TabPage2.Text = "Mantenimiento"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
+        'imageBox
+        '
+        Me.imageBox.BackColor = System.Drawing.Color.Gainsboro
+        Me.imageBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.imageBox.Location = New System.Drawing.Point(358, 8)
+        Me.imageBox.Name = "imageBox"
+        Me.imageBox.Size = New System.Drawing.Size(302, 271)
+        Me.imageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.imageBox.TabIndex = 24
+        Me.imageBox.TabStop = False
+        '
+        'btnChargeImage
+        '
+        Me.btnChargeImage.Location = New System.Drawing.Point(256, 162)
+        Me.btnChargeImage.Name = "btnChargeImage"
+        Me.btnChargeImage.Size = New System.Drawing.Size(96, 23)
+        Me.btnChargeImage.TabIndex = 23
+        Me.btnChargeImage.Text = "Seleccionar"
+        Me.btnChargeImage.UseVisualStyleBackColor = True
+        '
+        'pathImage
+        '
+        Me.pathImage.Enabled = False
+        Me.pathImage.Location = New System.Drawing.Point(96, 165)
+        Me.pathImage.Name = "pathImage"
+        Me.pathImage.Size = New System.Drawing.Size(128, 20)
+        Me.pathImage.TabIndex = 22
+        '
+        'Label7
+        '
+        Me.Label7.Location = New System.Drawing.Point(8, 165)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(80, 16)
+        Me.Label7.TabIndex = 21
+        Me.Label7.Text = "Imagen:"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'stockBox
+        '
+        Me.stockBox.Location = New System.Drawing.Point(96, 139)
+        Me.stockBox.Name = "stockBox"
+        Me.stockBox.Size = New System.Drawing.Size(128, 20)
+        Me.stockBox.TabIndex = 20
+        '
+        'Label5
+        '
+        Me.Label5.Location = New System.Drawing.Point(8, 139)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(80, 16)
+        Me.Label5.TabIndex = 19
+        Me.Label5.Text = "Stock:"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'priceBox
+        '
+        Me.priceBox.Location = New System.Drawing.Point(96, 113)
+        Me.priceBox.Name = "priceBox"
+        Me.priceBox.Size = New System.Drawing.Size(128, 20)
+        Me.priceBox.TabIndex = 18
+        '
+        'Label6
+        '
+        Me.Label6.Location = New System.Drawing.Point(8, 113)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(80, 16)
+        Me.Label6.TabIndex = 17
+        Me.Label6.Text = "Precio ($):"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'nameBox
+        '
+        Me.nameBox.Location = New System.Drawing.Point(96, 87)
+        Me.nameBox.Name = "nameBox"
+        Me.nameBox.Size = New System.Drawing.Size(128, 20)
+        Me.nameBox.TabIndex = 16
+        '
+        'Label4
+        '
+        Me.Label4.Location = New System.Drawing.Point(8, 87)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(80, 16)
+        Me.Label4.TabIndex = 15
+        Me.Label4.Text = "Nombre:"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'cboxCategories
         '
         Me.cboxCategories.FormattingEnabled = True
+        Me.cboxCategories.Items.AddRange(New Object() {"Seleccionar"})
         Me.cboxCategories.Location = New System.Drawing.Point(96, 34)
         Me.cboxCategories.Name = "cboxCategories"
         Me.cboxCategories.Size = New System.Drawing.Size(128, 21)
@@ -177,16 +265,16 @@ Partial Class FormArticle
         Me.btnInsertNew.Name = "btnInsertNew"
         Me.btnInsertNew.Size = New System.Drawing.Size(96, 64)
         Me.btnInsertNew.TabIndex = 8
-        Me.btnInsertNew.Text = "Registrar" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Nueva" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Categoría"
+        Me.btnInsertNew.Text = "Registrar" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Nuevo"
         Me.btnInsertNew.UseVisualStyleBackColor = True
         '
-        'descriptionTextBox
+        'descriptionBox
         '
-        Me.descriptionTextBox.Location = New System.Drawing.Point(96, 215)
-        Me.descriptionTextBox.Multiline = True
-        Me.descriptionTextBox.Name = "descriptionTextBox"
-        Me.descriptionTextBox.Size = New System.Drawing.Size(256, 64)
-        Me.descriptionTextBox.TabIndex = 7
+        Me.descriptionBox.Location = New System.Drawing.Point(96, 215)
+        Me.descriptionBox.Multiline = True
+        Me.descriptionBox.Name = "descriptionBox"
+        Me.descriptionBox.Size = New System.Drawing.Size(256, 64)
+        Me.descriptionBox.TabIndex = 7
         '
         'stateBox
         '
@@ -196,20 +284,20 @@ Partial Class FormArticle
         Me.stateBox.Size = New System.Drawing.Size(128, 20)
         Me.stateBox.TabIndex = 6
         '
-        'nameTextBox
+        'codeBox
         '
-        Me.nameTextBox.Location = New System.Drawing.Point(96, 61)
-        Me.nameTextBox.Name = "nameTextBox"
-        Me.nameTextBox.Size = New System.Drawing.Size(128, 20)
-        Me.nameTextBox.TabIndex = 5
+        Me.codeBox.Location = New System.Drawing.Point(96, 61)
+        Me.codeBox.Name = "codeBox"
+        Me.codeBox.Size = New System.Drawing.Size(128, 20)
+        Me.codeBox.TabIndex = 5
         '
-        'idTextBox
+        'idBox
         '
-        Me.idTextBox.Enabled = False
-        Me.idTextBox.Location = New System.Drawing.Point(96, 8)
-        Me.idTextBox.Name = "idTextBox"
-        Me.idTextBox.Size = New System.Drawing.Size(128, 20)
-        Me.idTextBox.TabIndex = 4
+        Me.idBox.Enabled = False
+        Me.idBox.Location = New System.Drawing.Point(96, 8)
+        Me.idBox.Name = "idBox"
+        Me.idBox.Size = New System.Drawing.Size(128, 20)
+        Me.idBox.TabIndex = 4
         '
         'Label3
         '
@@ -373,91 +461,6 @@ Partial Class FormArticle
         Me.btnClearSearchValue.Text = "Clr"
         Me.btnClearSearchValue.UseVisualStyleBackColor = True
         '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(96, 87)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(128, 20)
-        Me.TextBox1.TabIndex = 16
-        '
-        'Label4
-        '
-        Me.Label4.Location = New System.Drawing.Point(8, 87)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(80, 16)
-        Me.Label4.TabIndex = 15
-        Me.Label4.Text = "Nombre:"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Location = New System.Drawing.Point(96, 139)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(128, 20)
-        Me.TextBox2.TabIndex = 20
-        '
-        'Label5
-        '
-        Me.Label5.Location = New System.Drawing.Point(8, 139)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(80, 16)
-        Me.Label5.TabIndex = 19
-        Me.Label5.Text = "Stock:"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'TextBox3
-        '
-        Me.TextBox3.Location = New System.Drawing.Point(96, 113)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(128, 20)
-        Me.TextBox3.TabIndex = 18
-        '
-        'Label6
-        '
-        Me.Label6.Location = New System.Drawing.Point(8, 113)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(80, 16)
-        Me.Label6.TabIndex = 17
-        Me.Label6.Text = "Precio ($):"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'pathImage
-        '
-        Me.pathImage.Enabled = False
-        Me.pathImage.Location = New System.Drawing.Point(96, 165)
-        Me.pathImage.Name = "pathImage"
-        Me.pathImage.Size = New System.Drawing.Size(128, 20)
-        Me.pathImage.TabIndex = 22
-        '
-        'Label7
-        '
-        Me.Label7.Location = New System.Drawing.Point(8, 165)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(80, 16)
-        Me.Label7.TabIndex = 21
-        Me.Label7.Text = "Imagen:"
-        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'btnChargeImage
-        '
-        Me.btnChargeImage.Location = New System.Drawing.Point(256, 162)
-        Me.btnChargeImage.Name = "btnChargeImage"
-        Me.btnChargeImage.Size = New System.Drawing.Size(96, 23)
-        Me.btnChargeImage.TabIndex = 23
-        Me.btnChargeImage.Text = "Seleccionar"
-        Me.btnChargeImage.UseVisualStyleBackColor = True
-        '
-        'imageBox
-        '
-        Me.imageBox.BackColor = System.Drawing.Color.Gainsboro
-        Me.imageBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.imageBox.Location = New System.Drawing.Point(358, 8)
-        Me.imageBox.Name = "imageBox"
-        Me.imageBox.Size = New System.Drawing.Size(302, 271)
-        Me.imageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.imageBox.TabIndex = 24
-        Me.imageBox.TabStop = False
-        '
         'stockNeeded
         '
         Me.stockNeeded.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
@@ -467,6 +470,11 @@ Partial Class FormArticle
         '
         Me.priceNeeded.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
         Me.priceNeeded.ContainerControl = Me
+        '
+        'categoryNeeded
+        '
+        Me.categoryNeeded.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
+        Me.categoryNeeded.ContainerControl = Me
         '
         'FormArticle
         '
@@ -479,13 +487,14 @@ Partial Class FormArticle
         CType(Me.nameNeeded, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
+        CType(Me.imageBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvListado, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
-        CType(Me.imageBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.stockNeeded, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.priceNeeded, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.categoryNeeded, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -509,10 +518,10 @@ Partial Class FormArticle
     Friend WithEvents btnEnableDisable As Button
     Friend WithEvents btnModify As Button
     Friend WithEvents btnInsertNew As Button
-    Friend WithEvents descriptionTextBox As TextBox
+    Friend WithEvents descriptionBox As TextBox
     Friend WithEvents stateBox As TextBox
-    Friend WithEvents nameTextBox As TextBox
-    Friend WithEvents idTextBox As TextBox
+    Friend WithEvents codeBox As TextBox
+    Friend WithEvents idBox As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents stateLabelMant As Label
     Friend WithEvents Label1 As Label
@@ -523,12 +532,13 @@ Partial Class FormArticle
     Friend WithEvents btnChargeImage As Button
     Friend WithEvents pathImage As TextBox
     Friend WithEvents Label7 As Label
-    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents stockBox As TextBox
     Friend WithEvents Label5 As Label
-    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents priceBox As TextBox
     Friend WithEvents Label6 As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents nameBox As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents stockNeeded As ErrorProvider
     Friend WithEvents priceNeeded As ErrorProvider
+    Friend WithEvents categoryNeeded As ErrorProvider
 End Class

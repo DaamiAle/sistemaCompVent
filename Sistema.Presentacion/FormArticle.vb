@@ -11,7 +11,7 @@ Public Class FormArticle
         totalCount.Location = New Point(Width - totalCount.Width, totalCount.Location.Y)
         GetArticleList()
         ChargeCategories()
-        'nameNeeded.SetError(nameTextBox, "Este campo es obligatorio")
+        IndicateRequiredFields()
     End Sub
 
     Private Sub Format()
@@ -73,32 +73,39 @@ Public Class FormArticle
         End If
     End Sub
 
-    Private Sub dgvListado_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvListado.CellClick
 
-        Dim row As DataGridViewRow = dgvListado.CurrentRow
-        Dim id As Integer = row.Cells(1).Value
-        Dim name As String = row.Cells(2).Value
-        Dim description As String = row.Cells(3).Value
-        Dim status As Boolean = row.Cells(4).Value
-
-    End Sub
 
     Private Sub dgvListado_DoubleClick(sender As Object, e As EventArgs) Handles dgvListado.DoubleClick
-        'Dim row As DataGridViewRow = dgvListado.CurrentRow
-        'idTextBox.Enabled = False
-        'btnInsertNew.Enabled = False
-        'btnModify.Enabled = True
-        'btnDelete.Enabled = True
-        'btnEnableDisable.Enabled = True
-        'stateBox.Enabled = False
-        'Dim category As New Category
-        'Category.IdCategory = row.Cells(1).Value
-        'Category.Name = row.Cells(2).Value
-        'Category.Description = row.Cells(3).Value
-        'Category.State = row.Cells(4).Value
-        'nameNeeded.SetError(nameTextBox, "")
-        'ChargeCategoryInModifier(category)
+        Dim row As DataGridViewRow = dgvListado.CurrentRow
+        idBox.Enabled = False
+        btnInsertNew.Enabled = False
+        btnModify.Enabled = True
+        btnDelete.Enabled = True
+        btnEnableDisable.Enabled = True
+        stateBox.Enabled = False
+        nameNeeded.SetError(nameBox, "")
+        stockNeeded.SetError(stockBox, "")
+        priceNeeded.SetError(priceBox, "")
+        categoryNeeded.SetError(cboxCategories, "")
+        Dim article As Article
+        article = business.GetById(Integer.Parse(row.Cells(1).Value))
+        ChargeArticleInModified(article)
         TabControl1.SelectTab(1)
+    End Sub
+
+    Private Sub ChargeArticleInModified(article As Article)
+        idBox.Text = article.IdArticle
+        cboxCategories.SelectedValue = article.IdCategory
+        codeBox.Text = article.Code
+        nameBox.Text = article.Name
+        priceBox.Text = article.Price
+        stockBox.Text = article.Stock
+        pathImage.Text = article.Image
+        If (article.Image <> "") Then
+            Image.FromFile(article.Image)
+        End If
+        stateBox.Text = IIf(article.State, "Activo", "Inactivo")
+        descriptionBox.Text = article.Description
     End Sub
 
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
@@ -227,10 +234,64 @@ Public Class FormArticle
             pathImage.Text = originPath.Split("\").Last()
         End If
     End Sub
-
+    Private Sub TextBoxModified(sender As Object, e As EventArgs) Handles codeBox.TextChanged, nameBox.TextChanged, descriptionBox.TextChanged, imageBox.TextChanged, priceBox.TextChanged, stockBox.TextChanged, cboxCategories.SelectedIndexChanged
+        Dim fields As List(Of TextBox) = New List(Of TextBox) From {idBox, codeBox, nameBox, descriptionBox, pathImage, priceBox, stockBox}
+        btnClearFields.Enabled = fields.Any(Function(field) field.Text.Length > 0) Or cboxCategories.SelectedIndex > 0
+    End Sub
 #Region "Insert"
     Private Sub btnInsertNew_Click(sender As Object, e As EventArgs) Handles btnInsertNew.Click
 
+        If (codeBox.Text.Length = 0) Then
+            MsgBox("Los campos con indicador '!' son campos obligatorios")
+        Else
+            Dim article As New Article
+            article.IdCategory = cboxCategories.SelectedValue
+            article.Code = codeBox.Text
+            article.Name = nameBox.Text
+            article.Price = priceBox.Text
+            article.Stock = stockBox.Text
+            article.Image = originPath
+            article.State = True
+            article.Description = descriptionBox.Text
+            Try
+                business.Insert(article)
+                MsgBox("Articulo insertado correctamente", vbOKOnly + vbInformation, "Articulo insertado")
+                GetArticleList()
+                ClearFields()
+                TabControl1.SelectTab(0)
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        End If
+    End Sub
+
+    Private Sub ClearFields()
+        idBox.Text = ""
+        cboxCategories.SelectedIndex = 0
+        codeBox.Text = ""
+        nameBox.Text = ""
+        priceBox.Text = ""
+        stockBox.Text = ""
+        pathImage.Text = ""
+        imageBox.Image = Nothing
+        stateBox.Text = ""
+        descriptionBox.Text = ""
+        btnClearFields.Enabled = False
+        btnInsertNew.Enabled = True
+        btnModify.Enabled = False
+        btnDelete.Enabled = False
+        btnEnableDisable.Enabled = False
+    End Sub
+
+    Private Sub IndicateRequiredFields()
+        nameNeeded.SetError(nameBox, "Este campo es obligatorio")
+        categoryNeeded.SetError(cboxCategories, "Este campo es obligatorio")
+        priceNeeded.SetError(priceBox, "Este campo es obligatorio")
+        stockNeeded.SetError(stockBox, "Este campo es obligatorio")
+    End Sub
+
+    Private Sub btnClearFields_Click(sender As Object, e As EventArgs) Handles btnClearFields.Click
+        ClearFields()
     End Sub
 #End Region
 

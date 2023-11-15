@@ -14,6 +14,15 @@ Public Class ArticleBusiness
             Return Nothing
         End Try
     End Function
+
+    Public Function GetById(value As Integer) As Article
+        Try
+            Return data.GetById(value)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return Nothing
+        End Try
+    End Function
     Public Function Search(value As String) As DataTable
         Try
             Return data.Search(value)
