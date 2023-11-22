@@ -106,4 +106,10 @@ Public Class MainForm
         form.Show()
     End Sub
 
+    Private Sub UsuariosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UsuariosToolStripMenuItem.Click
+        Dim form As New FormUser
+        form.MdiParent = Me
+        form.WindowState = FormWindowState.Maximized
+        form.Show()
+    End Sub
 End Class

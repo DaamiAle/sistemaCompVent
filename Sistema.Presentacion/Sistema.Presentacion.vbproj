@@ -91,6 +91,12 @@
     <Compile Include="FormRole.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormUser.Designer.vb">
+      <DependentUpon>FormUser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormUser.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MainForm.Designer.vb">
       <DependentUpon>MainForm.vb</DependentUpon>
     </Compile>
@@ -123,6 +129,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormRole.resx">
       <DependentUpon>FormRole.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormUser.resx">
+      <DependentUpon>FormUser.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>

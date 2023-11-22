@@ -222,13 +222,13 @@ Partial Class MainForm
         'ProveedoresToolStripMenuItem
         '
         Me.ProveedoresToolStripMenuItem.Name = "ProveedoresToolStripMenuItem"
-        Me.ProveedoresToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ProveedoresToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
         Me.ProveedoresToolStripMenuItem.Text = "&Proveedores"
         '
         'ComprasToolStripMenuItem
         '
         Me.ComprasToolStripMenuItem.Name = "ComprasToolStripMenuItem"
-        Me.ComprasToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ComprasToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
         Me.ComprasToolStripMenuItem.Text = "&Compras"
         '
         'VentasToolStripMenuItem
