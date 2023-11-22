@@ -98,4 +98,12 @@ Public Class MainForm
         form.WindowState = FormWindowState.Maximized
         form.Show()
     End Sub
+
+    Private Sub RolesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RolesToolStripMenuItem.Click
+        Dim form As New FormRole
+        form.MdiParent = Me
+        form.WindowState = FormWindowState.Maximized
+        form.Show()
+    End Sub
+
 End Class

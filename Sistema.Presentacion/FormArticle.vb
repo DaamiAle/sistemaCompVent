@@ -27,7 +27,7 @@ Public Class FormArticle
         dgvListado.Columns(8).Width = 200
         dgvListado.Columns(9).Width = 100
         dgvListado.Columns(10).Width = 100
-
+        dgvListado.Sort(dgvListado.Columns(1), ComponentModel.ListSortDirection.Ascending)
         btnDeleteMulti.Visible = False
         btnDisableMulti.Visible = False
         btnEnableMulti.Visible = False
@@ -38,6 +38,7 @@ Public Class FormArticle
 
     Private Sub GetArticleList()
         Try
+
             dgvListado.DataSource = business.List()
             totalCount.Text = $"Registros totales: {dgvListado.DataSource.Rows.Count}"
             Format()
@@ -138,6 +139,24 @@ Public Class FormArticle
             Dim checkboxCell As DataGridViewCheckBoxCell = dgvListado.Rows(e.RowIndex).Cells(0)
             checkboxCell.Value = Not checkboxCell.Value
         End If
+        If dgvListado.Rows.Cast(Of DataGridViewRow).Any(Function(row) row.Cells(0).Value) Then
+            EnableButtons()
+        Else
+            DisableButtons()
+        End If
+    End Sub
+
+    Private Sub EnableButtons()
+        btnDeleteMulti.Enabled = True
+        btnEnableMulti.Enabled = True
+        btnDisableMulti.Enabled = True
+
+    End Sub
+
+    Private Sub DisableButtons()
+        btnDeleteMulti.Enabled = False
+        btnEnableMulti.Enabled = False
+        btnDisableMulti.Enabled = False
     End Sub
 
     Private Sub btnDeleteMulti_Click(sender As Object, e As EventArgs) Handles btnDeleteMulti.Click

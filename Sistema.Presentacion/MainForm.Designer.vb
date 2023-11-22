@@ -203,13 +203,13 @@ Partial Class MainForm
         'CategoríasToolStripMenuItem
         '
         Me.CategoríasToolStripMenuItem.Name = "CategoríasToolStripMenuItem"
-        Me.CategoríasToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CategoríasToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
         Me.CategoríasToolStripMenuItem.Text = "Cate&gorías"
         '
         'ArtículosToolStripMenuItem
         '
         Me.ArtículosToolStripMenuItem.Name = "ArtículosToolStripMenuItem"
-        Me.ArtículosToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ArtículosToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
         Me.ArtículosToolStripMenuItem.Text = "&Artículos"
         '
         'IngresosToolStripMenuItem
@@ -222,13 +222,13 @@ Partial Class MainForm
         'ProveedoresToolStripMenuItem
         '
         Me.ProveedoresToolStripMenuItem.Name = "ProveedoresToolStripMenuItem"
-        Me.ProveedoresToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
+        Me.ProveedoresToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ProveedoresToolStripMenuItem.Text = "&Proveedores"
         '
         'ComprasToolStripMenuItem
         '
         Me.ComprasToolStripMenuItem.Name = "ComprasToolStripMenuItem"
-        Me.ComprasToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
+        Me.ComprasToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ComprasToolStripMenuItem.Text = "&Compras"
         '
         'VentasToolStripMenuItem
@@ -260,13 +260,13 @@ Partial Class MainForm
         'RolesToolStripMenuItem
         '
         Me.RolesToolStripMenuItem.Name = "RolesToolStripMenuItem"
-        Me.RolesToolStripMenuItem.Size = New System.Drawing.Size(119, 22)
+        Me.RolesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.RolesToolStripMenuItem.Text = "&Roles"
         '
         'UsuariosToolStripMenuItem
         '
         Me.UsuariosToolStripMenuItem.Name = "UsuariosToolStripMenuItem"
-        Me.UsuariosToolStripMenuItem.Size = New System.Drawing.Size(119, 22)
+        Me.UsuariosToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.UsuariosToolStripMenuItem.Text = "&Usuarios"
         '
         'ConsultasToolStripMenuItem

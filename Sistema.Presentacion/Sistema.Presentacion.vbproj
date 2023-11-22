@@ -85,6 +85,12 @@
     <Compile Include="FormCategory.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormRole.Designer.vb">
+      <DependentUpon>FormRole.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormRole.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MainForm.Designer.vb">
       <DependentUpon>MainForm.vb</DependentUpon>
     </Compile>
@@ -114,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormCategory.resx">
       <DependentUpon>FormCategory.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRole.resx">
+      <DependentUpon>FormRole.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>
