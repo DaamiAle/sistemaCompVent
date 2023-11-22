@@ -141,14 +141,15 @@ insert into persona (tipo_persona, nombre, tipo_documento, num_documento, direcc
 insert into persona (tipo_persona, nombre, tipo_documento, num_documento, direccion, telefono, email) values ('Cliente', 'Pedro Rodriguez', 'DNI', '12345678', 'Av. Lima 789', '12345678', 'pedrito@gmail.com');
 go
 -- Insertar en la tabla rol --
+insert into rol (nombre, descripcion) values ('Seleccionar', '');
 insert into rol (nombre, descripcion) values ('Administrador', 'Administradores de la empresa');
 insert into rol (nombre, descripcion) values ('Vendedor', 'Vendedores de la empresa');
 insert into rol (nombre, descripcion) values ('Almacenero', 'Almaceneros de la empresa');
 go
 -- Insertar en la tabla usuario --
-insert into usuario (idrol, nombre, tipo_documento, num_documento, direccion, telefono, email, clave) values (1, 'JuanCarlos', 'DNI', '12345678', 'Av. Lima 123', '12345678', 'juancarlos@empresa.com', CONVERT(varbinary,'admin'));
-insert into usuario (idrol, nombre, tipo_documento, num_documento, direccion, telefono, email, clave) values (2, 'MarcosTadeus', 'DNI', '87654321', 'Av. Lima 456', '11223344', 'marcostadeus@empresa.com', CONVERT(varbinary,'vendedor'));
-insert into usuario (idrol, nombre, tipo_documento, num_documento, direccion, telefono, email, clave) values (3, 'AlbertoLopez', 'DNI', '12345678', 'Av. Lima 789', '44556677', 'albertolopez@empresa.com', CONVERT(varbinary,'almacenero'));
+insert into usuario (idrol, nombre, tipo_documento, num_documento, direccion, telefono, email, clave) values (2, 'JuanCarlos', 'DNI', '12345678', 'Av. Lima 123', '12345678', 'juancarlos@empresa.com', CONVERT(varbinary,'admin'));
+insert into usuario (idrol, nombre, tipo_documento, num_documento, direccion, telefono, email, clave) values (3, 'MarcosTadeus', 'DNI', '87654321', 'Av. Lima 456', '11223344', 'marcostadeus@empresa.com', CONVERT(varbinary,'vendedor'));
+insert into usuario (idrol, nombre, tipo_documento, num_documento, direccion, telefono, email, clave) values (4, 'AlbertoLopez', 'DNI', '12345678', 'Av. Lima 789', '44556677', 'albertolopez@empresa.com', CONVERT(varbinary,'almacenero'));
 go
 -- Insertar en la tabla ingreso --
 insert into ingreso (idproveedor, idusuario, tipo_comprobante, serie_comprobante, num_comprobante, fecha, impuesto, total, estado) values (1, 1, 'Boleta', '001', '0000001', '2020-01-01', 0.18, 1000, 'Aceptado');
@@ -417,6 +418,23 @@ where nombre like '%' + @name + '%' or descripcion like '%' + @name + '%'
 order by idrol desc;
 go
 
+-- Obtener por id --
+create proc role_get_by_id
+@idrole integer
+as
+select idrol as ID, nombre as Name, descripcion as Description, estado as State
+from rol
+where idrol = @idrole;
+go
+
+-- Obtener solo los roles activos --
+create proc active_role_list
+as
+select idrol as ID, nombre as Name, descripcion as Description, estado as State
+from rol
+where estado = 1
+go
+
 -- Insertar --
 create proc role_insert
 @name varchar(30),
@@ -507,16 +525,30 @@ create proc user_update
 @documenttype varchar(20),
 @documentnumber varchar(20),
 @address varchar(70),
-@phone varchar(20),
-@password varbinary(MAX)
+@phone varchar(20)
 as
-if @password <> ''
-update usuario set idrol = @idrole, nombre = @name, tipo_documento = @documenttype, num_documento = @documentnumber, direccion = @address, telefono = @phone, clave = HASHBYTES('SHA2_256',@password)
-where idusuario = @iduser;
-else
 update usuario set idrol = @idrole, nombre = @name, tipo_documento = @documenttype, num_documento = @documentnumber, direccion = @address, telefono = @phone
 where idusuario = @iduser;
 go
+
+-- Actualizar contraseña --
+create proc user_update_password
+@iduser integer,
+@password varbinary(MAX)
+as
+update usuario set clave = HASHBYTES('SHA2_256',@password)
+where idusuario = @iduser;
+go
+
+-- Actualizar email --
+create proc user_update_email
+@iduser integer,
+@email varchar(50)
+as
+update usuario set email = @email
+where idusuario = @iduser;
+go
+
 
 -- Eliminar --
 create proc user_delete
