@@ -476,6 +476,15 @@ where u.nombre like '%' + @name + '%' or u.num_documento like '%' + @name + '%' 
 order by u.idusuario desc;
 go
 
+-- Obtener por id --
+create proc user_get_by_id
+@iduser integer
+as
+select u.idusuario as ID, u.idrol as IDRole, r.nombre as Role, u.nombre as Name, u.tipo_documento as DocumentType, u.num_documento as DocumentNumber, u.direccion as Address, u.telefono as Phone, u.email as Email, u.estado as State
+from usuario u inner join rol r on u.idrol = r.idrol
+where u.idusuario = @iduser;
+go
+
 -- Insertar --
 create proc user_insert
 @idrole integer,
@@ -487,7 +496,7 @@ create proc user_insert
 @email varchar(50),
 @password varbinary(MAX)
 as
-insert into usuario (idrol, nombre, tipo_documento, num_documento, direccion, telefono, email, clave) values (@idrole, @name, @documenttype, @documentnumber, @address, @phone, @email, @password);
+insert into usuario (idrol, nombre, tipo_documento, num_documento, direccion, telefono, email, clave) values (@idrole, @name, @documenttype, @documentnumber, @address, @phone, @email, HASHBYTES('SHA2_256',@password));
 go
 
 -- Actualizar --
@@ -501,7 +510,11 @@ create proc user_update
 @phone varchar(20),
 @password varbinary(MAX)
 as
-update usuario set idrol = @idrole, nombre = @name, tipo_documento = @documenttype, num_documento = @documentnumber, direccion = @address, telefono = @phone, clave = @password
+if @password <> ''
+update usuario set idrol = @idrole, nombre = @name, tipo_documento = @documenttype, num_documento = @documentnumber, direccion = @address, telefono = @phone, clave = HASHBYTES('SHA2_256',@password)
+where idusuario = @iduser;
+else
+update usuario set idrol = @idrole, nombre = @name, tipo_documento = @documenttype, num_documento = @documentnumber, direccion = @address, telefono = @phone
 where idusuario = @iduser;
 go
 
