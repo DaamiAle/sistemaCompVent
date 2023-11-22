@@ -28,41 +28,60 @@ Public Class ArticleData
         End Try
     End Function
 
-    Public Function GetById(value As Integer) As Article
+    '    Public Function GetById(value As Integer) As Article
+    '    Try
+    '    Dim result As SqlDataReader
+    '    Dim entity As New Article
+    '    Dim command As New SqlCommand("article_get_by_id", ConnectionString)
+    '            command.CommandType = CommandType.StoredProcedure
+    '            command.Parameters.AddWithValue("@idarticle", value)
+    '            ConnectionString.Open()
+    '            result = command.ExecuteReader()
+    '            Console.WriteLine(result)
+    '    If result.Read Then
+    '                entity.IdArticle = result.GetInt32(0) 'okok
+    '                entity.IdCategory = result.GetInt32(1) 'okok
+    '                entity.Code = result.GetString(3) 'okok
+    '                entity.Name = result.GetString(4) 'okok
+    '                entity.Price = result.GetDecimal(5) 'okok
+    '                entity.Stock = result.GetInt32(6) 'okok
+    '                entity.Description = result.GetString(7) 'okok
+    '                Console.WriteLine("descripcion:" & entity.Description)
+    '
+    '                '                If result.GetString(8) = Nothing Then
+    '                entity.Image = ""
+    '                '                Else
+    '                '                entity.Image = result.GetString(8)
+    '                '                Console.WriteLine("imagen:" & entity.Image)
+    '                '            End If
+    '                '   Console.WriteLine("path:" & entity.Image)
+    '                entity.State = result.GetBoolean(9)
+    '    End If
+    '            ConnectionString.Close()
+    '    Return entity
+    '    Catch ex As Exception
+    '    Throw ex
+    '    End Try
+    '    End Function
+
+    Public Function GetById(value As Integer) As DataTable
         Try
             Dim result As SqlDataReader
-            Dim entity As New Article
+            Dim table As New DataTable
             Dim command As New SqlCommand("article_get_by_id", ConnectionString)
             command.CommandType = CommandType.StoredProcedure
             command.Parameters.AddWithValue("@idarticle", value)
             ConnectionString.Open()
             result = command.ExecuteReader()
-            Console.WriteLine(result)
-            If result.Read Then
-                entity.IdArticle = result.GetInt32(0) 'okok
-                entity.IdCategory = result.GetInt32(1) 'okok
-                entity.Code = result.GetString(3) 'okok
-                entity.Name = result.GetString(4) 'okok
-                entity.Price = result.GetDecimal(5) 'okok
-                entity.Stock = result.GetInt32(6) 'okok
-                entity.Description = result.GetString(7) 'okok
-                Console.WriteLine("descripcion:" & entity.Description)
-
-                '                If result.GetString(8) = Nothing Then
-                entity.Image = ""
-                '                Else
-                '                entity.Image = result.GetString(8)
-                '                Console.WriteLine("imagen:" & entity.Image)
-                '            End If
-                '   Console.WriteLine("path:" & entity.Image)
-                entity.State = result.GetBoolean(9)
-            End If
+            table.Load(result)
             ConnectionString.Close()
-            Return entity
+            Return table
         Catch ex As Exception
             Throw ex
         End Try
     End Function
+
+
     Public Function Search(value As String) As DataTable
         Try
             Dim result As SqlDataReader

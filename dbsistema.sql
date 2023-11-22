@@ -2,7 +2,7 @@
 create table categoria (
 	idcategoria integer primary key identity,
 	nombre varchar(50) not null unique,
-	descripcion varchar(255) null,
+	descripcion varchar(256) null,
 	estado bit default(1)
 );
 go
@@ -14,14 +14,17 @@ create table articulo (
 	nombre varchar(100) not null unique,
 	precio_venta decimal(11,2) not null,
 	stock integer not null,
-	descripcion varchar(255) null,
-	imagen varchar(20) null,
+	descripcion varchar(256) null,
+	imagen varchar(128) null,
 	estado bit default(1),
 	FOREIGN KEY (idcategoria) REFERENCES categoria(idcategoria)
 );
 go
 
-alter table articulo alter column imagen varchar(512);
+-- default cadena vacia
+--alter table articulo alter column imagen varchar(128) not null default('');
+--ALTER TABLE articulo
+--ADD CONSTRAINT DF_imagen DEFAULT '' FOR imagen;
 
 --Tabla Persona
 create table persona(
@@ -122,14 +125,15 @@ go
 
 -- Creamos 3 insert para cada tabla --
 -- Insertar en la tabla categoria --
+insert into categoria (nombre, descripcion) values ('Seleccionar', '');
 insert into categoria (nombre, descripcion) values ('Laptops', 'Laptops de última generación');
 insert into categoria (nombre, descripcion) values ('Celulares', 'Celulares de última generación');
 insert into categoria (nombre, descripcion) values ('Accesorios', 'Accesorios para celulares y laptops');
 go
 -- Insertar en la tabla articulo --
-insert into articulo (idcategoria, codigo, nombre, precio_venta, stock, descripcion, imagen) values (1, 'LAP001', 'Laptop HP', 1000, 10, 'Laptop HP 8GB RAM', null);
-insert into articulo (idcategoria, codigo, nombre, precio_venta, stock, descripcion, imagen) values (1, 'LAP002', 'Laptop Dell', 1200, 10, 'Laptop Dell 8GB RAM', null);
-insert into articulo (idcategoria, codigo, nombre, precio_venta, stock, descripcion, imagen) values (2, 'CEL001', 'Celular Samsung', 500, 10, 'Celular Samsung 8GB RAM', null);
+insert into articulo (idcategoria, codigo, nombre, precio_venta, stock, descripcion, imagen) values (2, 'LAP001', 'Laptop HP', 1000, 10, 'Laptop HP 8GB RAM', '');
+insert into articulo (idcategoria, codigo, nombre, precio_venta, stock, descripcion, imagen) values (2, 'LAP002', 'Laptop Dell', 1200, 10, 'Laptop Dell 8GB RAM', '');
+insert into articulo (idcategoria, codigo, nombre, precio_venta, stock, descripcion, imagen) values (3, 'CEL001', 'Celular Samsung', 500, 10, 'Celular Samsung 8GB RAM', '');
 go
 -- Insertar en la tabla persona --
 insert into persona (tipo_persona, nombre, tipo_documento, num_documento, direccion, telefono, email) values ('Proveedor', 'Juan Perez', 'DNI', '12345678', 'Av. Lima 123', '44556677', 'juanperez@proveedpr.com');
@@ -153,8 +157,8 @@ insert into ingreso (idproveedor, idusuario, tipo_comprobante, serie_comprobante
 go
 -- Insertar en la tabla detalle_ingreso --
 insert into detalle_ingreso (idingreso, idarticulo, cantidad, precio) values (1, 1, 10, 1000);
-insert into detalle_ingreso (idingreso, idarticulo, cantidad, precio) values (8, 2, 10, 1200);
-insert into detalle_ingreso (idingreso, idarticulo, cantidad, precio) values (9, 3, 10, 500);
+insert into detalle_ingreso (idingreso, idarticulo, cantidad, precio) values (2, 2, 10, 1200);
+insert into detalle_ingreso (idingreso, idarticulo, cantidad, precio) values (3, 3, 10, 500);
 go
 -- Insertar en la tabla venta --
 insert into venta (idcliente, idusuario, tipo_comprobante, serie_comprobante, num_comprobante, fecha, impuesto, total, estado) values (2, 1, 'Boleta', '001', '0000001', '2020-01-01', 0.18, 1000, 'Aceptado');
@@ -162,22 +166,14 @@ insert into venta (idcliente, idusuario, tipo_comprobante, serie_comprobante, nu
 insert into venta (idcliente, idusuario, tipo_comprobante, serie_comprobante, num_comprobante, fecha, impuesto, total, estado) values (3, 1, 'Boleta', '001', '0000003', '2020-01-03', 0.18, 500, 'Aceptado');
 go
 -- Insertar en la tabla detalle_venta --
-insert into detalle_venta (idventa, idarticulo, cantidad, precio, descuento) values (7, 1, 10, 1000, 0);
-insert into detalle_venta (idventa, idarticulo, cantidad, precio, descuento) values (8, 2, 10, 1200, 0);
-insert into detalle_venta (idventa, idarticulo, cantidad, precio, descuento) values (9, 3, 10, 500, 0);
+insert into detalle_venta (idventa, idarticulo, cantidad, precio, descuento) values (1, 1, 10, 1000, 0);
+insert into detalle_venta (idventa, idarticulo, cantidad, precio, descuento) values (2, 2, 10, 1200, 0);
+insert into detalle_venta (idventa, idarticulo, cantidad, precio, descuento) values (3, 3, 10, 500, 0);
 go
 
 
 -- Ahora los procesos CRUD de Categoria--
 -- todos los nombres de los procedimiento en ingles--
-
--- Listar --
-create proc category_list
-as
-select idcategoria as ID, nombre as Name, descripcion as Description, estado as State
-from categoria 
-order by idcategoria desc;
-go
 
 -- Obtener por id --
 create proc category_get_by_id
@@ -188,6 +184,14 @@ from categoria
 where idcategoria = @idcategory;
 go
 
+-- Listar --
+create proc category_list
+as
+select idcategoria as ID, nombre as Name, descripcion as Description, estado as State
+from categoria 
+order by idcategoria desc;
+go
+
 -- Buscar --
 create proc category_search
 @name varchar(50)
@@ -196,11 +200,12 @@ select idcategoria as ID, nombre as Name, descripcion as Description, estado as 
 from categoria 
 where nombre like '%' + @name + '%' or descripcion like '%' + @name + '%'
 order by idcategoria desc;
+go
 
 -- Insertar --
 create proc category_insert
 @name varchar(50),
-@description varchar(255)
+@description varchar(256)
 as
 insert into categoria (nombre, descripcion) values (@name, @description);
 go
@@ -209,7 +214,7 @@ go
 create proc category_update
 @idcategory integer,
 @name varchar(50),
-@description varchar(255)
+@description varchar(256)
 as
 update categoria set nombre = @name, descripcion = @description where idcategoria = @idcategory;
 go
@@ -279,8 +284,8 @@ create proc article_insert
 @name varchar(100),
 @price decimal(11,2),
 @stock integer,
-@description varchar(255),
-@image varchar(20)
+@description varchar(256),
+@image varchar(128)
 as
 insert into articulo (idcategoria, codigo, nombre, precio_venta, stock, descripcion, imagen) values (@idcategory, @code, @name, @price, @stock, @description, @image);
 go
@@ -294,7 +299,7 @@ create proc article_update
 @price decimal(11,2),
 @stock integer,
 @description varchar(255),
-@image varchar(20)
+@image varchar(128)
 as
 update articulo set idcategoria = @idcategory, codigo = @code, nombre = @name, precio_venta = @price, stock = @stock, descripcion = @description, imagen = @image where idarticulo = @idarticle;
 go
@@ -378,18 +383,18 @@ delete from persona where idpersona = @idperson;
 go
 
 -- Desactivar --
-create proc person_disable
-@idperson integer
-as
-update persona set estado = 0 where idpersona = @idperson;
-go
+--create proc person_disable
+--@idperson integer
+--as
+--update persona set estado = 0 where idpersona = @idperson;
+--go
 
 -- Activar --
-create proc person_enable
-@idperson integer
-as
-update persona set estado = 1 where idpersona = @idperson;
-go
+--create proc person_enable
+--@idperson integer
+--as
+--update persona set estado = 1 where idpersona = @idperson;
+--go
 
 
 -- El mismo CRUD pero de Rol--

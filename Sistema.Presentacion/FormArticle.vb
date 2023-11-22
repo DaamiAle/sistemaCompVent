@@ -89,11 +89,11 @@ Public Class FormArticle
         categoryNeeded.SetError(cboxCategories, "")
         Dim article As Article
         article = business.GetById(Integer.Parse(row.Cells(1).Value))
-        ChargeArticleInModified(article)
+        ChargeArticleInModifier(article)
         TabControl1.SelectTab(1)
     End Sub
 
-    Private Sub ChargeArticleInModified(article As Article)
+    Private Sub ChargeArticleInModifier(article As Article)
         idBox.Text = article.IdArticle
         cboxCategories.SelectedValue = article.IdCategory
         codeBox.Text = article.Code
@@ -101,8 +101,8 @@ Public Class FormArticle
         priceBox.Text = article.Price
         stockBox.Text = article.Stock
         pathImage.Text = article.Image
-        If (article.Image <> "") Then
-            Image.FromFile(article.Image)
+        If (article.Image.Length > 0) Then
+            imageBox.Image = Image.FromFile(article.Image)
         End If
         stateBox.Text = IIf(article.State, "Activo", "Inactivo")
         descriptionBox.Text = article.Description
@@ -225,44 +225,23 @@ Public Class FormArticle
         End Try
     End Sub
 
+    Private Sub TextBoxModified(sender As Object, e As EventArgs) Handles codeBox.TextChanged, nameBox.TextChanged, descriptionBox.TextChanged, imageBox.TextChanged, priceBox.TextChanged, stockBox.TextChanged, cboxCategories.SelectedIndexChanged
+        Dim fields As List(Of TextBox) = New List(Of TextBox) From {idBox, codeBox, nameBox, descriptionBox, pathImage, priceBox, stockBox}
+        btnClearFields.Enabled = fields.Any(Function(field) field.Text.Length > 0) Or cboxCategories.SelectedIndex > 0
+    End Sub
+
     Private Sub btnChargeImage_Click(sender As Object, e As EventArgs) Handles btnChargeImage.Click
         Dim fileDialog As New OpenFileDialog()
         fileDialog.Filter = "Image Files (*.jpg;*.jpeg;*.png;*.bmp)|*.jpg;*.jpeg;*.png;*.bmp"
         If fileDialog.ShowDialog() = DialogResult.OK Then
             originPath = fileDialog.FileName
             imageBox.Image = Image.FromFile(originPath)
-            pathImage.Text = originPath.Split("\").Last()
+            pathImage.Text = originPath
         End If
     End Sub
-    Private Sub TextBoxModified(sender As Object, e As EventArgs) Handles codeBox.TextChanged, nameBox.TextChanged, descriptionBox.TextChanged, imageBox.TextChanged, priceBox.TextChanged, stockBox.TextChanged, cboxCategories.SelectedIndexChanged
-        Dim fields As List(Of TextBox) = New List(Of TextBox) From {idBox, codeBox, nameBox, descriptionBox, pathImage, priceBox, stockBox}
-        btnClearFields.Enabled = fields.Any(Function(field) field.Text.Length > 0) Or cboxCategories.SelectedIndex > 0
-    End Sub
-#Region "Insert"
-    Private Sub btnInsertNew_Click(sender As Object, e As EventArgs) Handles btnInsertNew.Click
 
-        If (codeBox.Text.Length = 0) Then
-            MsgBox("Los campos con indicador '!' son campos obligatorios")
-        Else
-            Dim article As New Article
-            article.IdCategory = cboxCategories.SelectedValue
-            article.Code = codeBox.Text
-            article.Name = nameBox.Text
-            article.Price = priceBox.Text
-            article.Stock = stockBox.Text
-            article.Image = originPath
-            article.State = True
-            article.Description = descriptionBox.Text
-            Try
-                business.Insert(article)
-                MsgBox("Articulo insertado correctamente", vbOKOnly + vbInformation, "Articulo insertado")
-                GetArticleList()
-                ClearFields()
-                TabControl1.SelectTab(0)
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
-        End If
+    Private Sub btnClearFields_Click(sender As Object, e As EventArgs) Handles btnClearFields.Click
+        ClearFields()
     End Sub
 
     Private Sub ClearFields()
@@ -290,12 +269,62 @@ Public Class FormArticle
         stockNeeded.SetError(stockBox, "Este campo es obligatorio")
     End Sub
 
-    Private Sub btnClearFields_Click(sender As Object, e As EventArgs) Handles btnClearFields.Click
-        ClearFields()
+#Region "Insert"
+    Private Sub btnInsertNew_Click(sender As Object, e As EventArgs) Handles btnInsertNew.Click
+
+        If (codeBox.Text.Length = 0) Then
+            MsgBox("Los campos con indicador '!' son campos obligatorios")
+        Else
+            Dim article As New Article
+            article.IdCategory = cboxCategories.SelectedValue
+            article.Code = codeBox.Text
+            article.Name = nameBox.Text
+            article.Price = priceBox.Text
+            article.Stock = stockBox.Text
+            article.Image = pathImage.Text
+            Console.WriteLine(article.Image)
+            article.Description = descriptionBox.Text
+            Try
+                business.Insert(article)
+                MsgBox("Articulo insertado correctamente", vbOKOnly + vbInformation, "Articulo insertado")
+                GetArticleList()
+                ClearFields()
+                TabControl1.SelectTab(0)
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        End If
     End Sub
+
+
 #End Region
 
 
+#Region "Update"
+    Private Sub btnModify_Click(sender As Object, e As EventArgs) Handles btnModify.Click
+        Dim article As New Article
+        article.IdArticle = idBox.Text
+        article.IdCategory = cboxCategories.SelectedValue
+        article.Code = codeBox.Text
+        article.Name = nameBox.Text
+        article.Price = Decimal.Parse(priceBox.Text)
+        article.Stock = Integer.Parse(stockBox.Text)
+        article.Image = pathImage.Text
+        article.Description = descriptionBox.Text
+        Try
+            business.Update(article)
+            MsgBox("Articulo modificado correctamente", vbOKOnly + vbInformation, "Articulo modificado")
+            GetArticleList()
+            ClearFields()
+            TabControl1.SelectTab(0)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+
+
+#End Region
 #End Region
 
 

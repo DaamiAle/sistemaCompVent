@@ -1,12 +1,12 @@
 ﻿Imports System.Data.SqlClient
 
-Public Class Connection
+Public Class Connection_v2
     Private _base As String
     Private _server As String
     Private _user As String
     Private _password As String
-    Private _security As Boolean = True
-    Public sqlConnect As SqlConnection
+    Private _security As Boolean = False
+    Public ConnectionString As SqlConnection
     Public Property Base As String
         Get
             Return _base
@@ -51,9 +51,9 @@ Public Class Connection
     Public Sub New()
         Base = "systemCurse"
         Server = "DESKTOP-BTDTIQH"
-        User = ""
-        Password = ""
-        sqlConnect = New SqlConnection(CreateConnectionString)
+        User = "bdtusser"
+        Password = "root"
+        ConnectionString = New SqlConnection(CreateConnectionString)
     End Sub
 
     Public Function CreateConnectionString() As String
