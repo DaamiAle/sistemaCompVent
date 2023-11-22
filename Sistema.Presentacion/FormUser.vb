@@ -5,7 +5,7 @@ Public Class FormUser
 
     Private Sub FormUser_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         GetList()
-        'ChargeCategories()
+        ChargeRoles()
         'IndicateRequiredFields()
     End Sub
 
@@ -38,6 +38,15 @@ Public Class FormUser
         CheckBox1.CheckState = False
     End Sub
 
+    Private Sub ChargeRoles()
+        Try
+            ComboBox1.DataSource = New Negocio.RoleBusiness().ActiveRoles()
+            ComboBox1.ValueMember = "ID"
+            ComboBox1.DisplayMember = "Name"
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
     Private Sub Search()
         Try
             dgvList.DataSource = business.Search(searchValueTxtBox.Text)
@@ -204,4 +213,58 @@ Public Class FormUser
             End Try
         End If
     End Sub
+
+    Private Sub btnInsertNew_Click(sender As Object, e As EventArgs) Handles btnInsertNew.Click
+        Dim validEmail As Boolean = business.IsValidEmail(TextBox8.Text)
+        Dim validPassword As Boolean = business.IsValidPassword(TextBox9.Text)
+        If (ComboBox1.SelectedValue = 0 Or TextBox2.Text.Length = 0 Or TextBox4.Text.Length = 0 Or TextBox8.Text.Length = 0 Or TextBox9.Text.Length = 0) Then
+            MsgBox("Debe completar todos los campos obligatorios", vbOKOnly + vbExclamation, "Campos incompletos")
+        ElseIf Not validEmail Then
+            MsgBox("El email ingresado no es válido", vbOKOnly + vbExclamation, "Email inválido")
+        ElseIf Not validPassword Then
+            MsgBox("La contraseña ingresada no es válida", vbOKOnly + vbExclamation, "Contraseña inválida")
+        Else
+            Dim entity As New User
+            entity.IdRole = ComboBox1.SelectedValue
+            entity.Name = TextBox2.Text
+            entity.DocumentType = ComboBox2.SelectedItem
+            entity.DocumentNumber = TextBox4.Text
+            entity.Address = TextBox5.Text
+            entity.Phone = TextBox6.Text
+            entity.Email = TextBox8.Text
+            entity.Password = TextBox9.Text
+            entity.State = 1
+            If (business.Insert(entity)) Then
+                MsgBox("Usuario agregado correctamente", vbOKOnly + vbInformation, "Usuario agregado")
+                GetList()
+                TabControl1.SelectTab(0)
+            Else
+                MsgBox("No se pudo agregar el usuario", vbOKOnly + vbCritical, "Error al agregar")
+            End If
+        End If
+    End Sub
+
+    Private Sub btnModify_Click(sender As Object, e As EventArgs) Handles btnModify.Click
+        If (ComboBox1.SelectedValue = 0 Or TextBox2.Text.Length = 0 Or TextBox4.Text.Length = 0 Or TextBox8.Text.Length = 0 Or TextBox9.Text.Length = 0) Then
+            MsgBox("Debe completar todos los campos obligatorios", vbOKOnly + vbExclamation, "Campos incompletos")
+        Else
+            Dim entity As New User
+            entity.IdUser = Integer.Parse(TextBox1.Text)
+            entity.IdRole = ComboBox1.SelectedValue
+            entity.Name = TextBox2.Text
+            entity.DocumentType = ComboBox2.SelectedItem
+            entity.DocumentNumber = TextBox4.Text
+            entity.Address = TextBox5.Text
+            entity.Phone = TextBox6.Text
+            If (business.Update(entity)) Then
+                MsgBox("Usuario modificado correctamente", vbOKOnly + vbInformation, "Usuario modificado")
+                GetList()
+                TabControl1.SelectTab(0)
+            Else
+                MsgBox("No se pudo modificar el usuario", vbOKOnly + vbCritical, "Error al modificar")
+            End If
+        End If
+    End Sub
+
+
 End Class

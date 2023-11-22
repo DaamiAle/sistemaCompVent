@@ -100,4 +100,14 @@ Public Class UserBusiness
         Return result
     End Function
 
+    Public Function IsValidEmail(email As String) As Boolean
+        Dim re As New Text.RegularExpressions.Regex("^[\w._%-]+@[\w.-]+\.[a-zA-Z]{2,4}$")
+        Return re.IsMatch(email)
+    End Function
+
+    Public Function IsValidPassword(password As String) As Boolean
+        'la contraseña debera contener al menos 8 caracteres, una letra mayuscula, una letra minuscula y un caracter especial
+        Dim re As New Text.RegularExpressions.Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$")
+        Return re.IsMatch(password)
+    End Function
 End Class

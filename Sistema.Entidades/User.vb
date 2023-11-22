@@ -9,7 +9,7 @@
     Private _address As String
     Private _phone As String
     Private _email As String
-    Private _password As Byte()
+    Private _password As String
     Private _state As Boolean
 
 
@@ -88,11 +88,11 @@
         End Set
     End Property
 
-    Public Property Password As Byte()
+    Public Property Password As String
         Get
             Return _password
         End Get
-        Set(value As Byte())
+        Set(value As String)
             _password = value
         End Set
     End Property

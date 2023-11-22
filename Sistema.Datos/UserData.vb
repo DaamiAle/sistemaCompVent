@@ -95,7 +95,6 @@ Public Class UserData
             command.Parameters.AddWithValue("@documentnumber", entity.DocumentNumber)
             command.Parameters.AddWithValue("@address", entity.Address)
             command.Parameters.AddWithValue("@phone", entity.Phone)
-            command.Parameters.AddWithValue("@password", entity.Password)
             ConnectionString.Open()
             command.ExecuteNonQuery()
             ConnectionString.Close()

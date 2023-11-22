@@ -9,4 +9,13 @@ Public Class RoleBusiness
             Throw ex
         End Try
     End Function
+
+    Public Function ActiveRoles() As DataTable
+        Try
+            Dim roleData As New RoleData
+            Return roleData.ActiveRoles()
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
 End Class
