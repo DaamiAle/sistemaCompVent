@@ -161,7 +161,7 @@ Public Class FormArticle
 
     Private Sub btnDeleteMulti_Click(sender As Object, e As EventArgs) Handles btnDeleteMulti.Click
         If MsgBox("Esta seguro que desea eliminar las filas seleccionadas? Esta acción no se puede deshacer.", vbYesNo + vbQuestion, "Eliminar filas") = vbYes Then
-            Dim business As New Negocio.CategoryBusiness
+
             Dim rows As DataGridViewRowCollection = dgvListado.Rows
             Dim selectedRows As New List(Of DataGridViewRow)
             For Each row As DataGridViewRow In rows
@@ -185,7 +185,7 @@ Public Class FormArticle
 
     Private Sub btnEnableMulti_Click(sender As Object, e As EventArgs) Handles btnEnableMulti.Click
         If MsgBox("Esta seguro que desea habilitar las filas seleccionadas?", vbYesNo + vbQuestion, "Habilitar filas") = vbYes Then
-            Dim business As New Negocio.CategoryBusiness
+
             Dim rows As DataGridViewRowCollection = dgvListado.Rows
             Dim selectedRows As New List(Of DataGridViewRow)
             For Each row As DataGridViewRow In rows
@@ -209,7 +209,7 @@ Public Class FormArticle
 
     Private Sub btnDisableMulti_Click(sender As Object, e As EventArgs) Handles btnDisableMulti.Click
         If MsgBox("Esta seguro que desea deshabilitar las filas seleccionadas?", vbYesNo + vbQuestion, "Deshabilitar filas") = vbYes Then
-            Dim business As New Negocio.CategoryBusiness
+
             Dim rows As DataGridViewRowCollection = dgvListado.Rows
             Dim selectedRows As New List(Of DataGridViewRow)
             For Each row As DataGridViewRow In rows
