@@ -29,7 +29,7 @@ Public Class UserBusiness
         Dim table As DataTable = Nothing
         Try
             table = data.GetById(value)
-            entity.IdUser = table.Rows(0)("iduser")
+            entity.IdUser = table.Rows(0)("id")
             entity.IdRole = table.Rows(0)("idrole")
             entity.Name = table.Rows(0)("name")
             entity.DocumentType = table.Rows(0)("documenttype")
@@ -37,7 +37,7 @@ Public Class UserBusiness
             entity.Address = table.Rows(0)("address")
             entity.Phone = table.Rows(0)("phone")
             entity.Email = table.Rows(0)("email")
-            entity.Password = table.Rows(0)("password")
+            'entity.Password = table.Rows(0)("password")
             entity.State = table.Rows(0)("state")
         Catch ex As Exception
             MsgBox(ex.Message)

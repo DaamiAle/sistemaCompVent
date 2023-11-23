@@ -35,6 +35,36 @@ Partial Class FormUser
         Me.rowSelector = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.AccessBox = New System.Windows.Forms.GroupBox()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.TextBox13 = New System.Windows.Forms.TextBox()
+        Me.TextBox12 = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.TextBox11 = New System.Windows.Forms.TextBox()
+        Me.TextBox10 = New System.Windows.Forms.TextBox()
+        Me.TextBox9 = New System.Windows.Forms.TextBox()
+        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.idLabelMant = New System.Windows.Forms.Label()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnEnableDisable = New System.Windows.Forms.Button()
         Me.btnModify = New System.Windows.Forms.Button()
@@ -43,48 +73,18 @@ Partial Class FormUser
         Me.roleNeeded = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.documentNeeded = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.nameNeeded = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.idLabelMant = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.AccessBox = New System.Windows.Forms.GroupBox()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
-        Me.TextBox9 = New System.Windows.Forms.TextBox()
-        Me.TextBox10 = New System.Windows.Forms.TextBox()
-        Me.TextBox11 = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Label10 = New System.Windows.Forms.Label()
         Me.passwordNeeded = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.newPassword1Needed = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.newPassword2Needed = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.TextBox12 = New System.Windows.Forms.TextBox()
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.TabPage1.SuspendLayout()
         CType(Me.dgvList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
+        Me.AccessBox.SuspendLayout()
         CType(Me.emailNeeded, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.roleNeeded, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.documentNeeded, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nameNeeded, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.AccessBox.SuspendLayout()
         CType(Me.passwordNeeded, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.newPassword1Needed, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.newPassword2Needed, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -239,6 +239,287 @@ Partial Class FormUser
         Me.TabPage2.Text = "Mantenimiento"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
+        'Button2
+        '
+        Me.Button2.Enabled = False
+        Me.Button2.Location = New System.Drawing.Point(528, 295)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(96, 64)
+        Me.Button2.TabIndex = 30
+        Me.Button2.Text = "Cambiar Contraseña"
+        Me.Button2.UseVisualStyleBackColor = True
+        Me.Button2.Visible = False
+        '
+        'Button1
+        '
+        Me.Button1.Enabled = False
+        Me.Button1.Location = New System.Drawing.Point(424, 295)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(96, 64)
+        Me.Button1.TabIndex = 29
+        Me.Button1.Text = "Cambiar" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "E-mail"
+        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.Visible = False
+        '
+        'AccessBox
+        '
+        Me.AccessBox.Controls.Add(Me.Button3)
+        Me.AccessBox.Controls.Add(Me.Label11)
+        Me.AccessBox.Controls.Add(Me.TextBox13)
+        Me.AccessBox.Controls.Add(Me.TextBox12)
+        Me.AccessBox.Controls.Add(Me.Label10)
+        Me.AccessBox.Controls.Add(Me.TextBox11)
+        Me.AccessBox.Controls.Add(Me.TextBox10)
+        Me.AccessBox.Controls.Add(Me.TextBox9)
+        Me.AccessBox.Controls.Add(Me.TextBox8)
+        Me.AccessBox.Controls.Add(Me.Label9)
+        Me.AccessBox.Controls.Add(Me.Label8)
+        Me.AccessBox.Location = New System.Drawing.Point(320, 16)
+        Me.AccessBox.Name = "AccessBox"
+        Me.AccessBox.Size = New System.Drawing.Size(304, 273)
+        Me.AccessBox.TabIndex = 28
+        Me.AccessBox.TabStop = False
+        Me.AccessBox.Text = "Acceso"
+        '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(9, 244)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(256, 23)
+        Me.Button3.TabIndex = 39
+        Me.Button3.Text = "Cambiar a edicion de e-mail"
+        Me.Button3.UseVisualStyleBackColor = True
+        Me.Button3.Visible = False
+        '
+        'Label11
+        '
+        Me.Label11.Location = New System.Drawing.Point(6, 132)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(128, 16)
+        Me.Label11.TabIndex = 38
+        Me.Label11.Text = "Nuevo e-mail:"
+        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label11.Visible = False
+        '
+        'TextBox13
+        '
+        Me.TextBox13.Location = New System.Drawing.Point(9, 183)
+        Me.TextBox13.Name = "TextBox13"
+        Me.TextBox13.Size = New System.Drawing.Size(256, 20)
+        Me.TextBox13.TabIndex = 37
+        Me.TextBox13.Text = "Repetir e-mail"
+        Me.TextBox13.Visible = False
+        '
+        'TextBox12
+        '
+        Me.TextBox12.Location = New System.Drawing.Point(9, 157)
+        Me.TextBox12.Name = "TextBox12"
+        Me.TextBox12.Size = New System.Drawing.Size(256, 20)
+        Me.TextBox12.TabIndex = 36
+        Me.TextBox12.Text = "Ingresar e-mail"
+        Me.TextBox12.Visible = False
+        '
+        'Label10
+        '
+        Me.Label10.Location = New System.Drawing.Point(6, 132)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(128, 16)
+        Me.Label10.TabIndex = 35
+        Me.Label10.Text = "Nueva Contraseña:"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label10.Visible = False
+        '
+        'TextBox11
+        '
+        Me.TextBox11.Enabled = False
+        Me.TextBox11.Location = New System.Drawing.Point(9, 183)
+        Me.TextBox11.Name = "TextBox11"
+        Me.TextBox11.Size = New System.Drawing.Size(256, 20)
+        Me.TextBox11.TabIndex = 34
+        Me.TextBox11.Text = "Repetir contraseña"
+        Me.TextBox11.Visible = False
+        '
+        'TextBox10
+        '
+        Me.TextBox10.Enabled = False
+        Me.TextBox10.Location = New System.Drawing.Point(9, 157)
+        Me.TextBox10.Name = "TextBox10"
+        Me.TextBox10.Size = New System.Drawing.Size(256, 20)
+        Me.TextBox10.TabIndex = 33
+        Me.TextBox10.Text = "Ingresar contraseña"
+        Me.TextBox10.Visible = False
+        '
+        'TextBox9
+        '
+        Me.passwordNeeded.SetError(Me.TextBox9, "Contraseña es un campo obligatorio")
+        Me.TextBox9.Location = New System.Drawing.Point(9, 105)
+        Me.TextBox9.Name = "TextBox9"
+        Me.TextBox9.Size = New System.Drawing.Size(256, 20)
+        Me.TextBox9.TabIndex = 31
+        '
+        'TextBox8
+        '
+        Me.emailNeeded.SetError(Me.TextBox8, "E-mail es un campo obligatorio.")
+        Me.TextBox8.Location = New System.Drawing.Point(9, 53)
+        Me.TextBox8.Name = "TextBox8"
+        Me.TextBox8.Size = New System.Drawing.Size(256, 20)
+        Me.TextBox8.TabIndex = 29
+        '
+        'Label9
+        '
+        Me.Label9.Location = New System.Drawing.Point(6, 80)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(64, 16)
+        Me.Label9.TabIndex = 30
+        Me.Label9.Text = "Contraseña:"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label8
+        '
+        Me.Label8.Location = New System.Drawing.Point(6, 26)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(64, 16)
+        Me.Label8.TabIndex = 29
+        Me.Label8.Text = "e-mail:"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Items.AddRange(New Object() {"DNI", "Pasaporte", "Cedula", "Carnet"})
+        Me.ComboBox2.Location = New System.Drawing.Point(142, 95)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(128, 21)
+        Me.ComboBox2.TabIndex = 23
+        Me.ComboBox2.Text = "DNI"
+        '
+        'TextBox7
+        '
+        Me.TextBox7.Enabled = False
+        Me.TextBox7.Location = New System.Drawing.Point(142, 200)
+        Me.TextBox7.Name = "TextBox7"
+        Me.TextBox7.Size = New System.Drawing.Size(128, 20)
+        Me.TextBox7.TabIndex = 27
+        '
+        'TextBox6
+        '
+        Me.TextBox6.Location = New System.Drawing.Point(142, 174)
+        Me.TextBox6.Name = "TextBox6"
+        Me.TextBox6.Size = New System.Drawing.Size(128, 20)
+        Me.TextBox6.TabIndex = 26
+        '
+        'TextBox5
+        '
+        Me.TextBox5.Location = New System.Drawing.Point(142, 148)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(128, 20)
+        Me.TextBox5.TabIndex = 25
+        '
+        'TextBox4
+        '
+        Me.documentNeeded.SetError(Me.TextBox4, "Documento es un campo obligatorio.")
+        Me.TextBox4.Location = New System.Drawing.Point(142, 122)
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(128, 20)
+        Me.TextBox4.TabIndex = 24
+        '
+        'TextBox2
+        '
+        Me.nameNeeded.SetError(Me.TextBox2, "Nombre es un campo obligatorio.")
+        Me.TextBox2.Location = New System.Drawing.Point(142, 69)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(128, 20)
+        Me.TextBox2.TabIndex = 22
+        '
+        'ComboBox1
+        '
+        Me.roleNeeded.SetError(Me.ComboBox1, "Rol es un campo obligatorio.")
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(142, 42)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(128, 21)
+        Me.ComboBox1.TabIndex = 21
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Enabled = False
+        Me.TextBox1.Location = New System.Drawing.Point(142, 16)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(128, 20)
+        Me.TextBox1.TabIndex = 20
+        '
+        'Label7
+        '
+        Me.Label7.Location = New System.Drawing.Point(8, 201)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(128, 16)
+        Me.Label7.TabIndex = 19
+        Me.Label7.Text = "Estado:"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label6
+        '
+        Me.Label6.Location = New System.Drawing.Point(8, 179)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(128, 16)
+        Me.Label6.TabIndex = 18
+        Me.Label6.Text = "Teléfono:"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label5
+        '
+        Me.Label5.Location = New System.Drawing.Point(8, 152)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(128, 16)
+        Me.Label5.TabIndex = 17
+        Me.Label5.Text = "Domicilio:"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label4
+        '
+        Me.Label4.Location = New System.Drawing.Point(8, 126)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(128, 16)
+        Me.Label4.TabIndex = 16
+        Me.Label4.Text = "Documento:"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label3
+        '
+        Me.Label3.Location = New System.Drawing.Point(8, 97)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(128, 16)
+        Me.Label3.TabIndex = 15
+        Me.Label3.Text = "Tipo de documento:"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label2
+        '
+        Me.Label2.Location = New System.Drawing.Point(8, 70)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(128, 16)
+        Me.Label2.TabIndex = 14
+        Me.Label2.Text = "Nombre:"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label1
+        '
+        Me.Label1.Location = New System.Drawing.Point(8, 47)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(128, 16)
+        Me.Label1.TabIndex = 13
+        Me.Label1.Text = "Rol:"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'idLabelMant
+        '
+        Me.idLabelMant.Location = New System.Drawing.Point(8, 17)
+        Me.idLabelMant.Name = "idLabelMant"
+        Me.idLabelMant.Size = New System.Drawing.Size(128, 16)
+        Me.idLabelMant.TabIndex = 12
+        Me.idLabelMant.Text = "Id:"
+        Me.idLabelMant.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'btnDelete
         '
         Me.btnDelete.Enabled = False
@@ -301,238 +582,6 @@ Partial Class FormUser
         Me.nameNeeded.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
         Me.nameNeeded.ContainerControl = Me
         '
-        'idLabelMant
-        '
-        Me.idLabelMant.Location = New System.Drawing.Point(8, 17)
-        Me.idLabelMant.Name = "idLabelMant"
-        Me.idLabelMant.Size = New System.Drawing.Size(128, 16)
-        Me.idLabelMant.TabIndex = 12
-        Me.idLabelMant.Text = "Id:"
-        Me.idLabelMant.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label1
-        '
-        Me.Label1.Location = New System.Drawing.Point(8, 47)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(128, 16)
-        Me.Label1.TabIndex = 13
-        Me.Label1.Text = "Rol:"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label2
-        '
-        Me.Label2.Location = New System.Drawing.Point(8, 70)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(128, 16)
-        Me.Label2.TabIndex = 14
-        Me.Label2.Text = "Nombre:"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label3
-        '
-        Me.Label3.Location = New System.Drawing.Point(8, 97)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(128, 16)
-        Me.Label3.TabIndex = 15
-        Me.Label3.Text = "Tipo de documento:"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label4
-        '
-        Me.Label4.Location = New System.Drawing.Point(8, 126)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(128, 16)
-        Me.Label4.TabIndex = 16
-        Me.Label4.Text = "Documento:"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label5
-        '
-        Me.Label5.Location = New System.Drawing.Point(8, 152)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(128, 16)
-        Me.Label5.TabIndex = 17
-        Me.Label5.Text = "Domicilio:"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label6
-        '
-        Me.Label6.Location = New System.Drawing.Point(8, 179)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(128, 16)
-        Me.Label6.TabIndex = 18
-        Me.Label6.Text = "Teléfono:"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label7
-        '
-        Me.Label7.Location = New System.Drawing.Point(8, 201)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(128, 16)
-        Me.Label7.TabIndex = 19
-        Me.Label7.Text = "Estado:"
-        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Enabled = False
-        Me.TextBox1.Location = New System.Drawing.Point(142, 16)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(128, 20)
-        Me.TextBox1.TabIndex = 20
-        '
-        'ComboBox1
-        '
-        Me.roleNeeded.SetError(Me.ComboBox1, "Rol es un campo obligatorio.")
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(142, 42)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(128, 21)
-        Me.ComboBox1.TabIndex = 21
-        '
-        'TextBox2
-        '
-        Me.nameNeeded.SetError(Me.TextBox2, "Nombre es un campo obligatorio.")
-        Me.TextBox2.Location = New System.Drawing.Point(142, 69)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(128, 20)
-        Me.TextBox2.TabIndex = 22
-        '
-        'TextBox4
-        '
-        Me.documentNeeded.SetError(Me.TextBox4, "Documento es un campo obligatorio.")
-        Me.TextBox4.Location = New System.Drawing.Point(142, 122)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(128, 20)
-        Me.TextBox4.TabIndex = 24
-        '
-        'TextBox5
-        '
-        Me.TextBox5.Location = New System.Drawing.Point(142, 148)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(128, 20)
-        Me.TextBox5.TabIndex = 25
-        '
-        'TextBox6
-        '
-        Me.TextBox6.Location = New System.Drawing.Point(142, 174)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(128, 20)
-        Me.TextBox6.TabIndex = 26
-        '
-        'TextBox7
-        '
-        Me.TextBox7.Enabled = False
-        Me.TextBox7.Location = New System.Drawing.Point(142, 200)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(128, 20)
-        Me.TextBox7.TabIndex = 27
-        '
-        'ComboBox2
-        '
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Items.AddRange(New Object() {"DNI", "Pasaporte", "Cedula", "Carnet"})
-        Me.ComboBox2.Location = New System.Drawing.Point(142, 95)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(128, 21)
-        Me.ComboBox2.TabIndex = 23
-        Me.ComboBox2.Text = "DNI"
-        '
-        'AccessBox
-        '
-        Me.AccessBox.Controls.Add(Me.Button3)
-        Me.AccessBox.Controls.Add(Me.Label11)
-        Me.AccessBox.Controls.Add(Me.TextBox3)
-        Me.AccessBox.Controls.Add(Me.TextBox12)
-        Me.AccessBox.Controls.Add(Me.Label10)
-        Me.AccessBox.Controls.Add(Me.TextBox11)
-        Me.AccessBox.Controls.Add(Me.TextBox10)
-        Me.AccessBox.Controls.Add(Me.TextBox9)
-        Me.AccessBox.Controls.Add(Me.TextBox8)
-        Me.AccessBox.Controls.Add(Me.Label9)
-        Me.AccessBox.Controls.Add(Me.Label8)
-        Me.AccessBox.Location = New System.Drawing.Point(320, 16)
-        Me.AccessBox.Name = "AccessBox"
-        Me.AccessBox.Size = New System.Drawing.Size(304, 273)
-        Me.AccessBox.TabIndex = 28
-        Me.AccessBox.TabStop = False
-        Me.AccessBox.Text = "Acceso"
-        '
-        'Label8
-        '
-        Me.Label8.Location = New System.Drawing.Point(6, 26)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(64, 16)
-        Me.Label8.TabIndex = 29
-        Me.Label8.Text = "e-mail:"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label9
-        '
-        Me.Label9.Location = New System.Drawing.Point(6, 80)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(64, 16)
-        Me.Label9.TabIndex = 30
-        Me.Label9.Text = "Contraseña:"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'TextBox8
-        '
-        Me.emailNeeded.SetError(Me.TextBox8, "E-mail es un campo obligatorio.")
-        Me.TextBox8.Location = New System.Drawing.Point(9, 53)
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(256, 20)
-        Me.TextBox8.TabIndex = 29
-        '
-        'TextBox9
-        '
-        Me.passwordNeeded.SetError(Me.TextBox9, "Contraseña es un campo obligatorio")
-        Me.TextBox9.Location = New System.Drawing.Point(9, 105)
-        Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.Size = New System.Drawing.Size(256, 20)
-        Me.TextBox9.TabIndex = 31
-        '
-        'TextBox10
-        '
-        Me.TextBox10.Enabled = False
-        Me.TextBox10.Location = New System.Drawing.Point(9, 157)
-        Me.TextBox10.Name = "TextBox10"
-        Me.TextBox10.Size = New System.Drawing.Size(256, 20)
-        Me.TextBox10.TabIndex = 33
-        Me.TextBox10.Text = "Ingresar contraseña"
-        Me.TextBox10.Visible = False
-        '
-        'TextBox11
-        '
-        Me.TextBox11.Enabled = False
-        Me.TextBox11.Location = New System.Drawing.Point(9, 183)
-        Me.TextBox11.Name = "TextBox11"
-        Me.TextBox11.Size = New System.Drawing.Size(256, 20)
-        Me.TextBox11.TabIndex = 34
-        Me.TextBox11.Text = "Repetir contraseña"
-        Me.TextBox11.Visible = False
-        '
-        'Button1
-        '
-        Me.Button1.Enabled = False
-        Me.Button1.Location = New System.Drawing.Point(424, 295)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(96, 64)
-        Me.Button1.TabIndex = 29
-        Me.Button1.Text = "Cambiar" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "E-mail"
-        Me.Button1.UseVisualStyleBackColor = True
-        Me.Button1.Visible = False
-        '
-        'Label10
-        '
-        Me.Label10.Location = New System.Drawing.Point(6, 132)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(128, 16)
-        Me.Label10.TabIndex = 35
-        Me.Label10.Text = "Nueva Contraseña:"
-        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Label10.Visible = False
-        '
         'passwordNeeded
         '
         Me.passwordNeeded.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
@@ -548,57 +597,6 @@ Partial Class FormUser
         Me.newPassword2Needed.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
         Me.newPassword2Needed.ContainerControl = Me
         '
-        'Button2
-        '
-        Me.Button2.Enabled = False
-        Me.Button2.Location = New System.Drawing.Point(528, 295)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(96, 64)
-        Me.Button2.TabIndex = 30
-        Me.Button2.Text = "Cambiar Contraseña"
-        Me.Button2.UseVisualStyleBackColor = True
-        Me.Button2.Visible = False
-        '
-        'Label11
-        '
-        Me.Label11.Location = New System.Drawing.Point(6, 148)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(128, 16)
-        Me.Label11.TabIndex = 38
-        Me.Label11.Text = "Nueva Contraseña:"
-        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Label11.Visible = False
-        '
-        'TextBox3
-        '
-        Me.TextBox3.Enabled = False
-        Me.TextBox3.Location = New System.Drawing.Point(9, 199)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(256, 20)
-        Me.TextBox3.TabIndex = 37
-        Me.TextBox3.Text = "Repetir contraseña"
-        Me.TextBox3.Visible = False
-        '
-        'TextBox12
-        '
-        Me.TextBox12.Enabled = False
-        Me.TextBox12.Location = New System.Drawing.Point(9, 173)
-        Me.TextBox12.Name = "TextBox12"
-        Me.TextBox12.Size = New System.Drawing.Size(256, 20)
-        Me.TextBox12.TabIndex = 36
-        Me.TextBox12.Text = "Ingresar contraseña"
-        Me.TextBox12.Visible = False
-        '
-        'Button3
-        '
-        Me.Button3.Location = New System.Drawing.Point(9, 244)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(256, 23)
-        Me.Button3.TabIndex = 39
-        Me.Button3.Text = "Habilitar edicion de e-mail"
-        Me.Button3.UseVisualStyleBackColor = True
-        Me.Button3.Visible = False
-        '
         'FormUser
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -613,12 +611,12 @@ Partial Class FormUser
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
+        Me.AccessBox.ResumeLayout(False)
+        Me.AccessBox.PerformLayout()
         CType(Me.emailNeeded, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.roleNeeded, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.documentNeeded, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nameNeeded, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.AccessBox.ResumeLayout(False)
-        Me.AccessBox.PerformLayout()
         CType(Me.passwordNeeded, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.newPassword1Needed, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.newPassword2Needed, System.ComponentModel.ISupportInitialize).EndInit()
@@ -677,6 +675,6 @@ Partial Class FormUser
     Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button
     Friend WithEvents Label11 As Label
-    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents TextBox13 As TextBox
     Friend WithEvents TextBox12 As TextBox
 End Class

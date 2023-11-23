@@ -81,6 +81,29 @@ Public Class FormUser
     Private Sub dgvList_DoubleClick(sender As Object, e As EventArgs) Handles dgvList.DoubleClick
         Dim row As DataGridViewRow = dgvList.CurrentRow
         ' ACA LO DE LOS IDENTIFICADORES DE CAMPOS NECESARIOS
+        nameNeeded.SetError(TextBox2, "")
+        documentNeeded.SetError(TextBox4, "")
+        emailNeeded.SetError(TextBox8, "")
+        passwordNeeded.SetError(TextBox9, "")
+        roleNeeded.SetError(ComboBox1, "")
+        btnInsertNew.Enabled = False
+        btnModify.Enabled = True
+        btnEnableDisable.Enabled = True
+        btnDelete.Enabled = True
+        TextBox10.Enabled = True
+        TextBox11.Enabled = True
+        'Button1.Enabled = True
+        Button2.Enabled = True
+        Button3.Enabled = True
+        btnModify.Visible = True
+        btnEnableDisable.Visible = True
+        btnDelete.Visible = True
+        TextBox10.Visible = True
+        TextBox11.Visible = True
+        Button1.Visible = True
+        Button2.Visible = True
+        Button3.Visible = True
+        Label10.Visible = True
         ' TAMBIEN ACTIVAR Y DESACTIVAR TEXTBOX
 
         Dim entity As User = business.GetById(Integer.Parse(row.Cells(1).Value))
@@ -90,8 +113,26 @@ Public Class FormUser
 
     Private Sub ChargeInModifier(entity As User)
         ' FALTA COMPLETAR
-    End Sub
+        TextBox1.Text = entity.IdUser
+        ComboBox1.SelectedValue = entity.IdRole
+        TextBox2.Text = entity.Name
+        ComboBox2.SelectedItem = entity.DocumentType
+        TextBox4.Text = entity.DocumentNumber
+        TextBox5.Text = entity.Address
+        TextBox6.Text = entity.Phone
+        TextBox7.Text = entity.State
+        TextBox8.Text = entity.Email
 
+    End Sub
+    Private Sub SwitchPassEmailEdition(value As Boolean)
+        Button3.Text = IIf(value, "Cambiar a edicion de e-mail", "Cambiar a edicion de contraseña")
+        Label10.Visible = value
+        TextBox10.Visible = value
+        TextBox11.Visible = value
+        Label11.Visible = Not value
+        TextBox12.Visible = Not value
+        TextBox13.Visible = Not value
+    End Sub
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
         If (CheckBox1.Checked) Then
             dgvList.Columns(0).Visible = True
@@ -144,7 +185,7 @@ Public Class FormUser
 
     Private Sub btnDeleteMulti_Click(sender As Object, e As EventArgs) Handles btnDeleteMulti.Click
         If MsgBox("Esta seguro que desea eliminar las filas seleccionadas? Esta acción no se puede deshacer.", vbYesNo + vbQuestion, "Eliminar filas") = vbYes Then
-            Dim business As New Negocio.CategoryBusiness
+
             Dim rows As DataGridViewRowCollection = dgvList.Rows
             Dim selectedRows As New List(Of DataGridViewRow)
             For Each row As DataGridViewRow In rows
@@ -168,7 +209,7 @@ Public Class FormUser
 
     Private Sub btnEnableMulti_Click(sender As Object, e As EventArgs) Handles btnEnableMulti.Click
         If MsgBox("Esta seguro que desea habilitar las filas seleccionadas?", vbYesNo + vbQuestion, "Habilitar filas") = vbYes Then
-            Dim business As New Negocio.CategoryBusiness
+
             Dim rows As DataGridViewRowCollection = dgvList.Rows
             Dim selectedRows As New List(Of DataGridViewRow)
             For Each row As DataGridViewRow In rows
@@ -192,7 +233,7 @@ Public Class FormUser
 
     Private Sub btnDisableMulti_Click(sender As Object, e As EventArgs) Handles btnDisableMulti.Click
         If MsgBox("Esta seguro que desea deshabilitar las filas seleccionadas?", vbYesNo + vbQuestion, "Deshabilitar filas") = vbYes Then
-            Dim business As New Negocio.CategoryBusiness
+
             Dim rows As DataGridViewRowCollection = dgvList.Rows
             Dim selectedRows As New List(Of DataGridViewRow)
             For Each row As DataGridViewRow In rows
@@ -266,5 +307,9 @@ Public Class FormUser
         End If
     End Sub
 
-
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Button1.Enabled = Not Button1.Enabled
+        Button2.Enabled = Not Button2.Enabled
+        SwitchPassEmailEdition(Button2.Enabled)
+    End Sub
 End Class
