@@ -400,3 +400,4 @@ FodyWeavers.xsd
 
 # Custom exclude Files
 Connection_v2.vb
+Sistema.Datos/Connection.vb
