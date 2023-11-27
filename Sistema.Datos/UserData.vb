@@ -145,4 +145,54 @@ Public Class UserData
             Throw ex
         End Try
     End Function
+
+    Public Function Login(email As String, password As String) As DataTable
+        Try
+            Dim result As SqlDataReader
+            Dim table As New DataTable
+            Dim command As New SqlCommand("user_login", ConnectionString)
+            command.CommandType = CommandType.StoredProcedure
+            command.Parameters.AddWithValue("@email", email)
+            command.Parameters.AddWithValue("@password", password)
+            ConnectionString.Open()
+            result = command.ExecuteReader()
+            table.Load(result)
+            ConnectionString.Close()
+            Return table
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Function UpdatePassword(iduser As Integer, password As String) As Boolean
+        Try
+            Dim command As New SqlCommand("user_update_password", ConnectionString)
+            command.CommandType = CommandType.StoredProcedure
+            command.Parameters.AddWithValue("@iduser", iduser)
+            command.Parameters.AddWithValue("@password", password)
+            ConnectionString.Open()
+            command.ExecuteNonQuery()
+            ConnectionString.Close()
+            Return True
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Function UpdateEmail(iduser As Integer, email As String) As Boolean
+        Try
+            Dim command As New SqlCommand("user_update_email", ConnectionString)
+            command.CommandType = CommandType.StoredProcedure
+            command.Parameters.AddWithValue("@iduser", iduser)
+            command.Parameters.AddWithValue("@email", email)
+            ConnectionString.Open()
+            command.ExecuteNonQuery()
+            ConnectionString.Close()
+            Return True
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+
 End Class

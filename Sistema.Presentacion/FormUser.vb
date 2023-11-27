@@ -6,9 +6,16 @@ Public Class FormUser
     Private Sub FormUser_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         GetList()
         ChargeRoles()
-        'IndicateRequiredFields()
+        IndicateRequiredFields()
     End Sub
 
+    Private Sub IndicateRequiredFields()
+        nameNeeded.SetError(TextBox2, "Campo requerido")
+        documentNeeded.SetError(TextBox4, "Campo requerido")
+        emailNeeded.SetError(TextBox8, "Campo requerido")
+        passwordNeeded.SetError(TextBox9, "Campo requerido")
+        roleNeeded.SetError(ComboBox1, "Campo requerido")
+    End Sub
     Private Sub GetList()
         Try
             dgvList.DataSource = business.List()
@@ -36,6 +43,30 @@ Public Class FormUser
         btnDisableMulti.Visible = False
         btnEnableMulti.Visible = False
         CheckBox1.CheckState = False
+    End Sub
+
+    Private Sub ClearModifierFields()
+        TextBox1.Text = ""
+        ComboBox1.SelectedValue = 0
+        TextBox2.Text = ""
+        ComboBox2.SelectedItem = 0
+        TextBox4.Text = ""
+        TextBox5.Text = ""
+        TextBox6.Text = ""
+        TextBox7.Text = ""
+        TextBox8.Text = ""
+        btnDelete.Visible = False
+        btnEnableDisable.Visible = False
+        btnModify.Visible = False
+        btnInsertNew.Visible = True
+        btnInsertNew.Enabled = True
+        Button1.Visible = False
+        Button2.Visible = False
+        Button3.Visible = False
+        TextBox10.Visible = False
+        TextBox11.Visible = False
+        TextBox12.Visible = False
+        TextBox13.Visible = False
     End Sub
 
     Private Sub ChargeRoles()
@@ -86,33 +117,34 @@ Public Class FormUser
         emailNeeded.SetError(TextBox8, "")
         passwordNeeded.SetError(TextBox9, "")
         roleNeeded.SetError(ComboBox1, "")
+
         btnInsertNew.Enabled = False
+
         btnModify.Enabled = True
         btnEnableDisable.Enabled = True
         btnDelete.Enabled = True
-        TextBox10.Enabled = True
-        TextBox11.Enabled = True
-        'Button1.Enabled = True
-        Button2.Enabled = True
-        Button3.Enabled = True
         btnModify.Visible = True
         btnEnableDisable.Visible = True
         btnDelete.Visible = True
-        TextBox10.Visible = True
-        TextBox11.Visible = True
+
+        TextBox10.Enabled = True
+        TextBox11.Enabled = True
+        TextBox12.Enabled = True
+        TextBox13.Enabled = True
+
+        Button1.Enabled = False
+        Button2.Enabled = True
+        Button3.Enabled = True
         Button1.Visible = True
         Button2.Visible = True
         Button3.Visible = True
-        Label10.Visible = True
-        ' TAMBIEN ACTIVAR Y DESACTIVAR TEXTBOX
-
+        SwitchPassEmailEdition(True)
         Dim entity As User = business.GetById(Integer.Parse(row.Cells(1).Value))
         ChargeInModifier(entity)
         TabControl1.SelectTab(1)
     End Sub
 
     Private Sub ChargeInModifier(entity As User)
-        ' FALTA COMPLETAR
         TextBox1.Text = entity.IdUser
         ComboBox1.SelectedValue = entity.IdRole
         TextBox2.Text = entity.Name
@@ -120,7 +152,7 @@ Public Class FormUser
         TextBox4.Text = entity.DocumentNumber
         TextBox5.Text = entity.Address
         TextBox6.Text = entity.Phone
-        TextBox7.Text = entity.State
+        TextBox7.Text = IIf(entity.State, "Activo", "Inactivo")
         TextBox8.Text = entity.Email
 
     End Sub
@@ -286,8 +318,9 @@ Public Class FormUser
     End Sub
 
     Private Sub btnModify_Click(sender As Object, e As EventArgs) Handles btnModify.Click
-        If (ComboBox1.SelectedValue = 0 Or TextBox2.Text.Length = 0 Or TextBox4.Text.Length = 0 Or TextBox8.Text.Length = 0 Or TextBox9.Text.Length = 0) Then
+        If ComboBox1.SelectedValue = 0 Or TextBox2.Text.Length = 0 Or TextBox4.Text.Length = 0 Then 'Or TextBox8.Text.Length = 0 Or TextBox9.Text.Length = 0) Then
             MsgBox("Debe completar todos los campos obligatorios", vbOKOnly + vbExclamation, "Campos incompletos")
+            IndicateRequiredFields()
         Else
             Dim entity As New User
             entity.IdUser = Integer.Parse(TextBox1.Text)
@@ -300,6 +333,7 @@ Public Class FormUser
             If (business.Update(entity)) Then
                 MsgBox("Usuario modificado correctamente", vbOKOnly + vbInformation, "Usuario modificado")
                 GetList()
+                ClearModifierFields()
                 TabControl1.SelectTab(0)
             Else
                 MsgBox("No se pudo modificar el usuario", vbOKOnly + vbCritical, "Error al modificar")
@@ -312,4 +346,72 @@ Public Class FormUser
         Button2.Enabled = Not Button2.Enabled
         SwitchPassEmailEdition(Button2.Enabled)
     End Sub
+
+    Private Function VerifyEmailAndPasswordExistance() As Boolean
+        Return business.IsValidEmail(TextBox8.Text) And TextBox9.Text.Length > 0
+    End Function
+
+    Private Sub btnEnableDisable_Click(sender As Object, e As EventArgs) Handles btnEnableDisable.Click
+        If TextBox7.Text = "Activo" Then
+            If MsgBox("Esta seguro que desea deshabilitar el usuario?", vbYesNo + vbQuestion, "Deshabilitar usuario") = vbYes Then
+                If (business.Disable(Integer.Parse(TextBox1.Text))) Then
+                    MsgBox("Usuario deshabilitado correctamente", vbOKOnly + vbInformation, "Usuario deshabilitado")
+                    GetList()
+                    ClearModifierFields()
+                    TabControl1.SelectTab(0)
+                Else
+                    MsgBox("No se pudo deshabilitar el usuario", vbOKOnly + vbCritical, "Error al deshabilitar")
+                End If
+            End If
+        ElseIf TextBox7.Text = "Inactivo" Then
+            If MsgBox("Esta seguro que desea habilitar el usuario?", vbYesNo + vbQuestion, "Habilitar usuario") = vbYes Then
+                If (business.Enable(Integer.Parse(TextBox1.Text))) Then
+                    MsgBox("Usuario habilitado correctamente", vbOKOnly + vbInformation, "Usuario habilitado")
+                    GetList()
+                    ClearModifierFields()
+                    TabControl1.SelectTab(0)
+                Else
+                    MsgBox("No se pudo habilitar el usuario", vbOKOnly + vbCritical, "Error al habilitar")
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        If MsgBox("Esta seguro que desea eliminar este usuario? Esta acción no se puede deshacer.", vbYesNo + vbQuestion, "Eliminar usuario") = vbYes Then
+            If (business.Delete(Integer.Parse(TextBox1.Text))) Then
+                MsgBox("Usuario eliminado correctamente", vbOKOnly + vbInformation, "Usuario eliminado")
+                GetList()
+                ClearModifierFields()
+                TabControl1.SelectTab(0)
+            Else
+                MsgBox("No se pudo eliminar el usuario", vbOKOnly + vbCritical, "Error al eliminar")
+            End If
+        End If
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim opResult As Boolean = business.ChangePassword(Integer.Parse(TextBox1.Text), TextBox8.Text, TextBox9.Text, TextBox10.Text, TextBox11.Text)
+        If opResult Then
+            MsgBox("Contraseña modificada correctamente", vbOKOnly + vbInformation, "Contraseña modificada")
+            GetList()
+            ClearModifierFields()
+            TabControl1.SelectTab(0)
+        Else
+            MsgBox("No se pudo modificar la contraseña", vbOKOnly + vbCritical, "Error al modificar")
+        End If
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim opResult As Boolean = business.ChangeEmail(Integer.Parse(TextBox1.Text), TextBox8.Text, TextBox9.Text, TextBox12.Text, TextBox13.Text)
+        If opResult Then
+            MsgBox("Email modificado correctamente", vbOKOnly + vbInformation, "Email modificado")
+            GetList()
+            ClearModifierFields()
+            TabControl1.SelectTab(0)
+        Else
+            MsgBox("No se pudo modificar el email", vbOKOnly + vbCritical, "Error al modificar")
+        End If
+    End Sub
+
 End Class

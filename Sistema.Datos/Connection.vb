@@ -50,8 +50,8 @@ Public Class Connection_v2
 
     Public Sub New()
         Base = "systemCurse"
-        'Server = "DESKTOP-BTDTIQH"
-        Server = "DESKTOP-33QTLSO"
+        Server = "DESKTOP-BTDTIQH"
+        'Server = "DESKTOP-33QTLSO"
         User = "bdtusser"
         Password = "root"
         ConnectionString = New SqlConnection(CreateConnectionString)

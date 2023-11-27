@@ -571,6 +571,16 @@ as
 update usuario set estado = 1 where idusuario = @iduser;
 go
 
+-- User Login --
+create proc user_login
+@email varchar(50),
+@password varbinary(MAX)
+as
+select u.idusuario as ID, u.idrol as IDRole, r.nombre as Role, u.nombre as Name, u.estado as State
+from usuario u inner join rol r on u.idrol = r.idrol
+where u.email = @email and u.clave = HASHBYTES('SHA2_256',@password) and u.estado = 1;
+go
+
 
 -- El mismo CRUD pero de Ingreso--
 
